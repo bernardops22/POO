@@ -4,15 +4,15 @@ import java.awt.event.KeyEvent;
 import pt.iul.ista.poo.utils.Direction;
 import pt.iul.ista.poo.utils.Point2D;
 
-public class Player extends Objetos implements ObjetosAnimados{
+public class Player extends AbstractObjects implements AnimatedObjects{
 
 	private String imageName;
-	private SokobanGame jogo;
+	private SokobanGame game;
 
-	public Player(Point2D initialPosition, SokobanGame jogo){
+	public Player(Point2D initialPosition, SokobanGame game){
 		super(initialPosition);
-		this.jogo = jogo;
-		imageName = "Empilhadora_U";
+		this.game = game;
+		imageName = "Player_U";
 	}
 
 	@Override
@@ -36,29 +36,29 @@ public class Player extends Objetos implements ObjetosAnimados{
 		if (Direction.isDirection(lastKeyPressed)) {
 			switch(lastKeyPressed){
 			case KeyEvent.VK_LEFT:
-				imageName = "Empilhadora_L";
+				imageName = "Player_L";
 				break;
 			case KeyEvent.VK_UP:
-				imageName = "Empilhadora_U";
+				imageName = "Player_U";
 				break;
 			case KeyEvent.VK_RIGHT:
-				imageName ="Empilhadora_R";
+				imageName ="Player_R";
 				break;
 			case KeyEvent.VK_DOWN:
-				imageName ="Empilhadora_D";
+				imageName ="Player_D";
 				break;
 			}
 
-			for(Objetos objeto: jogo.getObjetos()) {
+			for(AbstractObjects object: game.getObjects()) {
 				if (newPosition.getX()>=0 && newPosition.getX()<10 && newPosition.getY()>=0 
 						&& newPosition.getY()<10 ) {
-					if(objeto.getPosition().equals(newPosition) && objeto.getLayer()<getLayer()) {
+					if(object.getPosition().equals(newPosition) && object.getLayer()<getLayer()) {
 						setPosition(newPosition);
-						jogo.setPassos(jogo.getPassos() + 1);
-						jogo.setEnergia(jogo.getEnergia() - 1);
+						game.setSteps(game.getSteps() + 1);
+						game.setEnergy(game.getEnergy() - 1);
 					}
-					if(objeto.getPosition().equals(newPosition) && objeto.getName()=="Caixote")
-						((Caixote)objeto).move(lastKeyPressed);
+					if(object.getPosition().equals(newPosition) && object.getName()=="Box")
+						((Box)object).move(lastKeyPressed);
 				}
 			}
 			System.out.println(getPosition() + " " + imageName + " " + lastKeyPressed);

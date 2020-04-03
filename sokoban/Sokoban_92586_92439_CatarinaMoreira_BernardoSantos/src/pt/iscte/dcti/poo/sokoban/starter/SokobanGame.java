@@ -16,52 +16,51 @@ import pt.iul.ista.poo.utils.Point2D;
 public class SokobanGame implements Observer {
 
 	private Player player;
-	private ArrayList<Objetos> objetos = new ArrayList<Objetos>();
-	private int energia = 100;
-	private int passos = 0;
+	private ArrayList<AbstractObjects> objects = new ArrayList<AbstractObjects>();
+	private int energy = 100;
+	private int steps = 0;
 	private int nLevel = 0;
 	private String playerName = "";
 
 	public SokobanGame(){
 		playerName();
 
-		ImageMatrixGUI.getInstance().setStatusMessage("   Empilhadora: " + playerName + 
-				"   |    Nivel: " + nLevel + "    |    Energia: " + 
-				energia + "    |    Passos: " + passos);
+		ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName + 
+				"   |    Level: " + nLevel + "    |    Energy: " + 
+				energy + "    |    Steps: " + steps);
 
 		buildSampleLevel();
 
-		for(ImageTile imagem: objetos)
-			ImageMatrixGUI.getInstance().addImage(imagem);
+		for(ImageTile image: objects)
+			ImageMatrixGUI.getInstance().addImage(image);
 	}
 	
-	public ArrayList<Objetos> getObjetos() {
-		return objetos;
+	public ArrayList<AbstractObjects> getObjects() {
+		return objects;
 	}
 
-	public int getEnergia() {
-		return energia;
+	public int getEnergy() {
+		return energy;
 	}
 
-	public int getPassos() {
-		return passos;
+	public int getSteps() {
+		return steps;
 	}
 
-	public void setEnergia(int energia) {
-		this.energia = energia;
+	public void setEnergy(int energia) {
+		this.energy = energia;
 	}
 
-	public void setPassos(int passos) {
-		this.passos = passos;
+	public void setSteps(int passos) {
+		this.steps = passos;
 	}
 
 	public void playerName() {
-		String response = JOptionPane.showInputDialog(null,"Qual o nome da tua empilhadora?",
+		String response = JOptionPane.showInputDialog(null,"What is your name?",
 				"Sokoban by Hiroyuki Imabayashi (1981)",JOptionPane.QUESTION_MESSAGE);
 		if(response == null) throw new NullPointerException();
 		if (response.length()==0) {
-			JOptionPane.showMessageDialog(null,"Tens de ter um nome de gamer");
-			//			SokobanGame sokoban = new SokobanGame();
+			JOptionPane.showMessageDialog(null,"You must have a gamer name");
 		}
 
 		playerName = response;
@@ -74,50 +73,50 @@ public class SokobanGame implements Observer {
 			File file = new File(filename);
 			Scanner s =  new Scanner(file);
 
-			String linha;
-			String[] simbolos;
+			String line;
+			String[] symbols;
 			int y = 0;
 
 			while(s.hasNextLine()) {
 
-				linha = s.nextLine();
-				simbolos = linha.split("");
+				line = s.nextLine();
+				symbols = line.split("");
 
 				for(int x = 0; x!=10 ; x++) {
-					switch(simbolos[x]) {
+					switch(symbols[x]) {
 					case "#" :
-						objetos.add(new Parede(new Point2D(x,y)));
+						objects.add(new Wall(new Point2D(x,y)));
 						break;
 					case "C":
-						objetos.add(new Caixote(new Point2D(x,y),this));
-						objetos.add(new Chao(new Point2D(x,y)));
+						objects.add(new Box(new Point2D(x,y),this));
+						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "O":
-						objetos.add(new Buraco(new Point2D(x,y)));
-						objetos.add(new Chao(new Point2D(x,y)));
+						objects.add(new Hole(new Point2D(x,y)));
+						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "X":
-						objetos.add(new Alvo(new Point2D(x,y)));
+						objects.add(new Target(new Point2D(x,y)));
 						break;
 					case "E":
 						player = new Player(new Point2D(x,y),this);
-						objetos.add(new Chao(new Point2D(x,y)));
-						objetos.add(player);
+						objects.add(new Floor(new Point2D(x,y)));
+						objects.add(player);
 						break;
 					case "b":
-						objetos.add(new Bateria(new Point2D(x,y)));
-						objetos.add(new Chao(new Point2D(x,y)));
+						objects.add(new Battery(new Point2D(x,y)));
+						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "S":
-						objetos.add(new BigStone(new Point2D(x,y)));
-						objetos.add(new Chao(new Point2D(x,y)));
+						objects.add(new BigStone(new Point2D(x,y)));
+						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "s":
-						objetos.add(new SmallStone(new Point2D(x,y)));
-						objetos.add(new Chao(new Point2D(x,y)));
+						objects.add(new SmallStone(new Point2D(x,y)));
+						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case " ": 
-						objetos.add(new Chao(new Point2D(x,y)));
+						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					}
 				}
@@ -130,20 +129,20 @@ public class SokobanGame implements Observer {
 	}
 
 	//Quando ficarmos sem energia na empilhadora
-	public void semEnergia() {
-		if (energia == 0) {
-			passos = 0;
-			energia = 100;
+	public void noEnergy() {
+		if (energy == 0) {
+			steps = 0;
+			energy = 100;
 
-			Object[] opcoes = {"Repetir nível","Sair"};
-			int n = JOptionPane.showOptionDialog(null,"O que queres fazer?","GAME OVER",
-					JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opcoes,opcoes[0]);
+			Object[] options = {"Repeat level","Leave"};
+			int response = JOptionPane.showOptionDialog(null,"What do you want to do?","GAME OVER",
+					JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 
-			if(n == 0) {
-				for(ImageTile imagem: objetos)
-					ImageMatrixGUI.getInstance().removeImage(imagem);
+			if(response == 0) {
+				for(ImageTile image: objects)
+					ImageMatrixGUI.getInstance().removeImage(image);
 
-				objetos.removeAll(objetos);
+				objects.removeAll(objects);
 				buildSampleLevel();
 			}
 			else ImageMatrixGUI.getInstance().dispose();
@@ -155,42 +154,42 @@ public class SokobanGame implements Observer {
 	//	public void restart(Observed arg0) {
 	//		int lastKeyPressed = ((ImageMatrixGUI)arg0).keyPressed();
 	//		if(lastKeyPressed == KeyEvent.VK_R) {
-	//			for(ImageTile imagem: objetos)
-	//				ImageMatrixGUI.getInstance().removeImage(imagem);
+	//			for(ImageTile image: objects)
+	//				ImageMatrixGUI.getInstance().removeImage(image);
 	//			
-	//			objetos.removeAll(objetos);
+	//			objetos.removeAll(objects);
 	//			buildSampleLevel();
 	//		}
 	//			
 	//	}
 
 	//Quando o nível é completado
-	public void nivelCompleto() {
+	public void levelComplete() {
 
-		ArrayList<ImageTile> caixotes = new ArrayList<ImageTile>();
-		ArrayList<ImageTile> alvos = new ArrayList<ImageTile>();
+		ArrayList<ImageTile> boxes = new ArrayList<ImageTile>();
+		ArrayList<ImageTile> targets = new ArrayList<ImageTile>();
 
 		int n = 0;
-		for(Objetos objeto: objetos) {
-			if (objeto.getName()=="Caixote")
-				caixotes.add(objeto);
-			if (objeto.getName()=="Alvo")
-				alvos.add(objeto);
+		for(AbstractObjects object: objects) {
+			if (object.getName()=="Box")
+				boxes.add(object);
+			if (object.getName()=="Target")
+				targets.add(object);
 		}
-		for(ImageTile caixote: caixotes)
-			for(ImageTile alvo: alvos)
-				if (caixote.getPosition()==alvo.getPosition())
+		for(ImageTile box: boxes)
+			for(ImageTile target: targets)
+				if (box.getPosition()==target.getPosition())
 					n++;
 
-		if(caixotes.size() == n) {
-			objetos.removeAll(objetos);
+		if(boxes.size() == n) {
+			objects.removeAll(objects);
 			nLevel++;
 
 			try {
-				FileWriter file = new FileWriter("pontos/pontuacao.txt");
-				file.write(playerName + " " + passos);
+				FileWriter file = new FileWriter("points/punctuation.txt");
+				file.write(playerName + " " + steps);
 				file.close();
-				JOptionPane.showMessageDialog(null, " Nome: "+ playerName + "    Passos: "  + passos);
+				JOptionPane.showMessageDialog(null, " Name: "+ playerName + "    Steps: "  + steps);
 
 			}catch(IOException e) {}
 
@@ -202,13 +201,13 @@ public class SokobanGame implements Observer {
 	public void update(Observed arg0) {
 		int lastKeyPressed = ((ImageMatrixGUI)arg0).keyPressed();
 		if (player != null) {
-			semEnergia();	
+			noEnergy();	
 			//			restart(arg0);
 			player.move(lastKeyPressed);
 			ImageMatrixGUI.getInstance().update();
-			ImageMatrixGUI.getInstance().setStatusMessage("   Empilhadora: " + playerName +
-					"   |    Nivel: " + nLevel + "    |    Energia: " + energia + "    |    "
-					+ "Passos: " + passos);
+			ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName +
+					"   |    Level: " + nLevel + "    |    Energy: " + energy + "    |    "
+					+ "Steps: " + steps);
 		}
 	}
 }
