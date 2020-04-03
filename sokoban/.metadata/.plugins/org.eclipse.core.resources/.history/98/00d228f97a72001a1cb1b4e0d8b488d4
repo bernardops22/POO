@@ -1,0 +1,12 @@
+package pt.iscte.dcti.poo.sokoban.starter;
+
+import pt.iul.ista.poo.utils.Direction;
+import pt.iul.ista.poo.utils.Point2D;
+
+public interface ObjetosAnimados {
+	
+	public void move(Direction direction);
+	
+	public void setPosition(Point2D position);
+	
+}

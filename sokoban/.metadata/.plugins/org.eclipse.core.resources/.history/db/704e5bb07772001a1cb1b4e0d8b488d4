@@ -1,0 +1,19 @@
+package pt.iscte.dcti.poo.sokoban.starter;
+
+import pt.iul.ista.poo.utils.Point2D;
+
+public class Bateria extends Objetos{
+	
+	private String imageName;
+	
+	public Bateria(Point2D position){
+		super(position);
+		this.imageName = "Bateria";
+	}
+	
+	@Override
+	public String getName() {
+		return imageName;
+	}
+
+}

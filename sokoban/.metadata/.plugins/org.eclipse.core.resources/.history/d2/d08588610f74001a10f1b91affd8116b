@@ -1,0 +1,32 @@
+package pt.iscte.dcti.poo.sokoban.starter;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.util.Scanner;
+
+public class PlayerName {
+	
+	private String Name;
+	
+	public void setName() {
+		System.out.print ("What is your name?");
+		Scanner name = new Scanner (System.in);
+		
+		try {
+			FileWriter file = new FileWriter("pontos/pontuacao.txt");
+			
+			file.write("");
+			
+		}catch(IOException e) {}
+		
+		System.out.print (name);
+
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	
+}

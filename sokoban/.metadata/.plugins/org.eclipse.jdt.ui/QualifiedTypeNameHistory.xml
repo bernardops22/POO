@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Vector2D"/>
+    <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageTile"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
+    <fullyQualifiedTypeName name="java.awt.geom.Point2D"/>
+    <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Point2D"/>
+    <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Direction"/>
+    <fullyQualifiedTypeName name="javax.swing.text.Position"/>
+    <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageMatrixGUI"/>
+</qualifiedTypeNameHistroy>

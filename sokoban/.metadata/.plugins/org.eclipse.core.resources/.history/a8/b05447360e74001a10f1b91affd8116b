@@ -1,0 +1,23 @@
+package pt.iscte.dcti.poo.sokoban.starter;
+
+import java.util.Scanner;
+
+public class PlayerName {
+	
+	private String Name;
+	
+	public void setName() {
+		System.out.print ("What is your name?");
+		Scanner name = new Scanner (System.in);
+
+		name.nextLine();
+		System.out.print (name);
+
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	
+}

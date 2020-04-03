@@ -1,0 +1,29 @@
+package pt.iscte.dcti.poo.sokoban.starter;
+
+import pt.iul.ista.poo.gui.ImageTile;
+import pt.iul.ista.poo.utils.Point2D;
+
+public abstract class Objetos implements ImageTile{
+
+	private Point2D position;
+	
+	public Objetos(Point2D position) {
+		super();
+		this.position = position;
+	}
+	
+	@Override
+	public String getName() {
+		return null;
+	}
+
+	@Override
+	public Point2D getPosition() {
+		return position;
+	}
+
+	@Override   					//QUASE TODOS OS OBJETOS TEM LAYER 1 PARA REDUZIR CODIGO
+	public int getLayer() {
+		return 1;
+	}
+}

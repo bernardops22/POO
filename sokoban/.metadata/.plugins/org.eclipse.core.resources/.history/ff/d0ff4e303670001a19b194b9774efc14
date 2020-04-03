@@ -1,0 +1,48 @@
+
+public class Merge {
+
+	private static boolean less (Integer v, Integer w) {
+		
+		return v<=w;
+	
+	}
+
+	private static void merge(int[] a, int[] aux, int lo, int mid, int hi) {
+
+		for (int k = lo; k<= hi; k++)
+			aux[k] = a[k];
+
+		int i = lo, j = mid + 1;
+		for (int k = lo; k <= hi; k++) {
+			if (i > mid) a[k] = aux[j++];
+			else if (j > hi) a[k] = aux[i++];
+			else if (less(aux[j],aux[i])) a[k] = aux[j++];
+			else a[k] = aux[i++];
+		}
+
+	}
+
+	private static void sort(int[] a) {
+		
+		int N = a.length;
+		int[] aux = new int[N];
+		for (int sz = 1; sz < N; sz=sz+sz) 
+			for(int lo = 0; lo < N-sz; lo += sz+sz) 
+				merge(a,aux,lo,lo+sz-1,Math.min(lo+sz-1,N-1));
+		
+	}
+
+	public static void main(String[] args) {
+		
+//		int[] a = new int[Integer.parseInt(args[0])];
+		
+//		for (int i = 0; i<a.length;i++)
+//			a[i] = Integer.parseInt(args[i+1]);
+		
+		int[] a = {6,5,2,3,4};
+		
+		sort(a);
+		
+	}
+
+}
