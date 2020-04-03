@@ -58,11 +58,10 @@ public class SokobanGame implements Observer {
 	public void playerName() {
 		String response = JOptionPane.showInputDialog(null,"What is your name?",
 				"Sokoban by Hiroyuki Imabayashi (1981)",JOptionPane.QUESTION_MESSAGE);
-		if(response == null) throw new NullPointerException("See you soon my friend");
+		if(response == null) throw new NullPointerException();
 		if (response.length()==0) {
 			JOptionPane.showMessageDialog(null,"You must have a gamer name");
 			playerName();
-			playerName = response;
 		}
 
 		playerName = response;
