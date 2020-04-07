@@ -12,8 +12,8 @@
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
     <fullyQualifiedTypeName name="java.awt.geom.Point2D"/>
-    <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Point2D"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Direction"/>
     <fullyQualifiedTypeName name="javax.swing.text.Position"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageMatrixGUI"/>
+    <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Point2D"/>
 </qualifiedTypeNameHistroy>

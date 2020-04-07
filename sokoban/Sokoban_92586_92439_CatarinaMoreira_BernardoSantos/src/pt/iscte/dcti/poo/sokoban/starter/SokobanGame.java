@@ -30,11 +30,8 @@ public class SokobanGame implements Observer {
 				energy + "    |    Steps: " + steps);
 
 		buildSampleLevel();
-
-		for(ImageTile image: objects)
-			ImageMatrixGUI.getInstance().addImage(image);
 	}
-	
+
 	public ArrayList<AbstractObjects> getObjects() {
 		return objects;
 	}
@@ -95,7 +92,6 @@ public class SokobanGame implements Observer {
 						break;
 					case "O":
 						objects.add(new Hole(new Point2D(x,y)));
-						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "X":
 						objects.add(new Target(new Point2D(x,y)));
@@ -125,6 +121,8 @@ public class SokobanGame implements Observer {
 				y++;
 			}
 			s.close();
+			for(ImageTile image: objects)
+				ImageMatrixGUI.getInstance().addImage(image);
 
 		}catch (FileNotFoundException e){
 		}
@@ -132,24 +130,20 @@ public class SokobanGame implements Observer {
 
 	//Quando ficarmos sem energia na empilhadora
 	public void noEnergy() {
-		if (energy == 0) {
-			steps = 0;
-			energy = 100;
-
+		if(energy==0) {
 			Object[] options = {"Repeat level","Leave"};
 			int response = JOptionPane.showOptionDialog(null,"What do you want to do?","GAME OVER",
 					JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-
 			if(response == 0) {
 				for(ImageTile image: objects)
 					ImageMatrixGUI.getInstance().removeImage(image);
 
 				objects.removeAll(objects);
+				this.steps=0;
+				this.energy=100;
 				buildSampleLevel();
 			}
 			else ImageMatrixGUI.getInstance().dispose();
-
-
 		}
 	}
 
@@ -166,38 +160,38 @@ public class SokobanGame implements Observer {
 	//	}
 
 	//Quando o nível é completado
-	public void levelComplete() {
-
-		ArrayList<ImageTile> boxes = new ArrayList<ImageTile>();
-		ArrayList<ImageTile> targets = new ArrayList<ImageTile>();
-
-		int n = 0;
-		for(AbstractObjects object: objects) {
-			if (object.getName()=="Box")
-				boxes.add(object);
-			if (object.getName()=="Target")
-				targets.add(object);
-		}
-		for(ImageTile box: boxes)
-			for(ImageTile target: targets)
-				if (box.getPosition()==target.getPosition())
-					n++;
-
-		if(boxes.size() == n) {
-			objects.removeAll(objects);
-			nLevel++;
-
-			try {
-				FileWriter file = new FileWriter("points/punctuation.txt");
-				file.write(playerName + " " + steps);
-				file.close();
-				JOptionPane.showMessageDialog(null, " Name: "+ playerName + "    Steps: "  + steps);
-
-			}catch(IOException e) {}
-
-			buildSampleLevel();
-		}
-	}
+//	public void levelComplete() {
+//
+//		ArrayList<ImageTile> boxes = new ArrayList<ImageTile>();
+//		ArrayList<ImageTile> targets = new ArrayList<ImageTile>();
+//
+//		int n = 0;
+//		for(AbstractObjects object: objects) {
+//			if (object.getName()=="Box")
+//				boxes.add(object);
+//			if (object.getName()=="Target")
+//				targets.add(object);
+//		}
+//		for(ImageTile box: boxes)
+//			for(ImageTile target: targets)
+//				if (box.getPosition()==target.getPosition())
+//					n++;
+//
+//		if(boxes.size() == n) {
+//			objects.removeAll(objects);
+//			nLevel++;
+//
+//			try {
+//				FileWriter file = new FileWriter("points/punctuation.txt");
+//				file.write(playerName + " " + steps);
+//				file.close();
+//				JOptionPane.showMessageDialog(null, " Name: "+ playerName + "    Steps: "  + steps);
+//
+//			}catch(IOException e) {}
+//
+//			buildSampleLevel();
+//		}
+//	}
 
 	@Override
 	public void update(Observed arg0) {

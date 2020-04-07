@@ -1,6 +1,10 @@
 package pt.iscte.dcti.poo.sokoban.starter;
 
 import java.awt.event.KeyEvent;
+
+import javax.swing.JOptionPane;
+
+import pt.iul.ista.poo.gui.ImageMatrixGUI;
 import pt.iul.ista.poo.utils.Direction;
 import pt.iul.ista.poo.utils.Point2D;
 
@@ -50,13 +54,21 @@ public class Player extends AbstractObjects implements AnimatedObjects{
 			}
 
 			for(AbstractObjects object: game.getObjects()) {
+				
 				if (newPosition.getX()>=0 && newPosition.getX()<10 && newPosition.getY()>=0 
 						&& newPosition.getY()<10 ) {
+					
 					if(object.getPosition().equals(newPosition) && object.getLayer()<getLayer()) {
 						setPosition(newPosition);
 						game.setSteps(game.getSteps() + 1);
 						game.setEnergy(game.getEnergy() - 1);
-					}
+						
+						if(object.getName()=="Hole") {
+							game.setEnergy(0);
+							ImageMatrixGUI.getInstance().update();
+							JOptionPane.showMessageDialog(null, "You have fallen into a hole.");
+						}
+					}				
 					if(object.getPosition().equals(newPosition) && object.getName()=="Box")
 						((Box)object).move(lastKeyPressed);
 				}

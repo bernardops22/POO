@@ -13,4 +13,9 @@ public class Battery extends AbstractObjects{
 		return "Battery";
 	}
 	
+	@Override
+	public int getLayer() {
+		return 2;
+	}
+	
 }
