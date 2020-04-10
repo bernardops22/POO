@@ -24,7 +24,8 @@ public class SokobanGame implements Observer {
 
 	public SokobanGame(){
 		playerName();
-
+		
+		ImageMatrixGUI.getInstance().setName("Best Sokoban Ever");
 		ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName + 
 				"   |    Level: " + nLevel + "    |    Energy: " + 
 				energy + "    |    Steps: " + steps);
@@ -51,7 +52,13 @@ public class SokobanGame implements Observer {
 	public void setSteps(int passos) {
 		this.steps = passos;
 	}
-
+	
+	public void removeObject(AbstractObjects object) {
+		for (AbstractObjects obj: objects) {
+			if (obj == object) objects.remove(object);
+		}
+	}
+	
 	public void playerName() {
 		String response = JOptionPane.showInputDialog(null,"What is your name?",
 				"Sokoban by Hiroyuki Imabayashi (1981)",JOptionPane.QUESTION_MESSAGE);
@@ -91,7 +98,7 @@ public class SokobanGame implements Observer {
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "O":
-						objects.add(new Hole(new Point2D(x,y)));
+						objects.add(new Hole(new Point2D(x,y),this));
 						break;
 					case "X":
 						objects.add(new Target(new Point2D(x,y)));
@@ -102,7 +109,7 @@ public class SokobanGame implements Observer {
 						objects.add(player);
 						break;
 					case "b":
-						objects.add(new Battery(new Point2D(x,y)));
+						objects.add(new Battery(new Point2D(x,y),this));
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "S":
@@ -162,22 +169,13 @@ public class SokobanGame implements Observer {
 	//Quando o nível é completado
 //	public void levelComplete() {
 //
-//		ArrayList<ImageTile> boxes = new ArrayList<ImageTile>();
-//		ArrayList<ImageTile> targets = new ArrayList<ImageTile>();
-//
 //		int n = 0;
-//		for(AbstractObjects object: objects) {
-//			if (object.getName()=="Box")
-//				boxes.add(object);
-//			if (object.getName()=="Target")
-//				targets.add(object);
-//		}
-//		for(ImageTile box: boxes)
-//			for(ImageTile target: targets)
-//				if (box.getPosition()==target.getPosition())
-//					n++;
+//		
+//		for(ImageTile object: objects) 
+//			if (((Box)object).getPosition() == ((Target)object).getPosition())
+//				n++;
 //
-//		if(boxes.size() == n) {
+//		if(nBoxes == n) {
 //			objects.removeAll(objects);
 //			nLevel++;
 //
@@ -198,6 +196,7 @@ public class SokobanGame implements Observer {
 		int lastKeyPressed = ((ImageMatrixGUI)arg0).keyPressed();
 		if (player != null) {
 			noEnergy();	
+//			levelComplete();
 			//			restart(arg0);
 			player.move(lastKeyPressed);
 			ImageMatrixGUI.getInstance().update();

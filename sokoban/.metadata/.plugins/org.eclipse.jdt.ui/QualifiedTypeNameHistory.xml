@@ -2,12 +2,9 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Vector2D"/>
-    <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageTile"/>
     <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="java.io.File"/>
-    <fullyQualifiedTypeName name="java.io.FileWriter"/>
-    <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
@@ -16,4 +13,8 @@
     <fullyQualifiedTypeName name="javax.swing.text.Position"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageMatrixGUI"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Point2D"/>
+    <fullyQualifiedTypeName name="pt.iscte.dcti.poo.sokoban.starter.Battery"/>
+    <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageTile"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
 </qualifiedTypeNameHistroy>

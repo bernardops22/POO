@@ -22,4 +22,6 @@ public class BigStone extends AbstractObjects implements AnimatedObjects{
 	public void move(int lastKeyPressed) {
 		
 	}
+	
+	
 }
