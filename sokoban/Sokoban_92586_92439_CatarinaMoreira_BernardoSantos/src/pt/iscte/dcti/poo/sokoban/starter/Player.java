@@ -29,48 +29,37 @@ public class Player extends AbstractObjects implements AnimatedObjects{
 		this.imageName = imageName;
 	}
 
-	public void move(int lastKeyPressed) {
-		
+	public void move(int lastKeyPressed) {			
 		Point2D newPosition = getPosition().plus(Direction.directionFor(lastKeyPressed).asVector());
-		
-		if (Direction.isDirection(lastKeyPressed)) {
-			switch(lastKeyPressed){
-			case KeyEvent.VK_LEFT:
-				imageName = "Player_L";
-				break;
-			case KeyEvent.VK_UP:
-				imageName = "Player_U";
-				break;
-			case KeyEvent.VK_RIGHT:
-				imageName ="Player_R";
-				break;
-			case KeyEvent.VK_DOWN:
-				imageName ="Player_D";
-				break;
-			}
 
-			for(AbstractObjects object: game.getObjects()) {
-				
-				if (newPosition.getX()>=0 && newPosition.getX()<10 && newPosition.getY()>=0 
-						&& newPosition.getY()<10 ) {
-					
-					if(object.getPosition().equals(newPosition) && object.getLayer()<getLayer()) {
-						setPosition(newPosition);
-						game.setSteps(game.getSteps() + 1);
-						game.setEnergy(game.getEnergy() - 1);
-						
-						if(object.getName()=="Hole") ((Hole)object).overlap();
-						
-					}	
-					
-					if(object.getPosition().equals(newPosition) && object.getName()=="Box")
-						((Box)object).move(lastKeyPressed);
-					
-					if(object.getPosition().equals(newPosition) && object.getName()=="Battery") 
-						((Battery)object).overlap();
+		switch(lastKeyPressed){
+		case KeyEvent.VK_LEFT:
+			imageName = "Player_L";
+			break;
+		case KeyEvent.VK_UP:
+			imageName = "Player_U";
+			break;
+		case KeyEvent.VK_RIGHT:
+			imageName ="Player_R";
+			break;
+		case KeyEvent.VK_DOWN:
+			imageName ="Player_D";
+			break;
+		}
+
+		for(AbstractObjects object: game.getObjects()) {
+			if (newPosition.getX()>=0 && newPosition.getX()<10 && newPosition.getY()>=0 
+					&& newPosition.getY()<10 && object.getPosition().equals(newPosition)) {
+				if (object.getLayer()<getLayer()){
+					setPosition(newPosition);
+					game.setSteps(game.getSteps() + 1);
+					game.setEnergy(game.getEnergy() - 1);
+					System.out.println(getPosition() + " " + imageName + " " + lastKeyPressed);
 				}
+				if(object.getName()=="Hole")((Hole)object).disappear();
+				if(object.getName()=="Box")((Box)object).move(lastKeyPressed);
+				if(object.getName()=="Battery")((Battery)object).overlap();
 			}
-			System.out.println(getPosition() + " " + imageName + " " + lastKeyPressed);
 		}			
 	}
 }

@@ -19,10 +19,11 @@ public class Hole extends AbstractObjects {
 		return "Hole";
 	}
 
-	public void overlap() {
+	public void disappear() {
 		ImageMatrixGUI.getInstance().update();
 		game.setEnergy(0);
 		JOptionPane.showMessageDialog(null, "You have fallen into a hole.");
+		game.repeatLevel();
 	}
 	
 }

@@ -24,17 +24,11 @@ public class Battery extends AbstractObjects{
 	}
 
 	public void overlap() {
-		
-		game.setEnergy(101);
-		
-//		for (AbstractObjects object: game.getObjects())
-//			if (object.getName()==getName()) game.removeObject(object);
-		
 		for (ImageTile object: game.getObjects())
-			if (object.getName()==getName()) 
+			if (object.getName()==getName()) {
+				game.setEnergy(101);
 				ImageMatrixGUI.getInstance().removeImage(object);
-		
-		ImageMatrixGUI.getInstance().update();
+			}		
 	}
 	
 }
