@@ -6,7 +6,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/Wall.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="124" width="184" x="1756" y="1335"/>    
+    <position height="124" width="184" x="438" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -17,7 +17,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/Target.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="184" x="1980" y="1335"/>    
+    <position height="124" width="184" x="662" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -28,7 +28,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/Box.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="142" width="193" x="2876" y="1335"/>    
+    <position height="160" width="193" x="1110" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/SokobanGame.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="340" width="263" x="3356" y="1553"/>    
+    <position height="394" width="263" x="1883" y="400"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -50,7 +50,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/AbstractObjects.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="177" width="184" x="2876" y="1118"/>    
+    <position height="213" width="223" x="1606" y="-71"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -61,7 +61,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/BigStone.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="142" width="184" x="2428" y="1335"/>    
+    <position height="142" width="223" x="1343" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -72,7 +72,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/Hole.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="124" width="196" x="3356" y="1335"/>    
+    <position height="124" width="196" x="2130" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -83,18 +83,18 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/Main.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="184" x="2204" y="1118"/>    
+    <position height="106" width="184" x="910" y="-71"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="9" language="java" name="pt.iscte.dcti.poo.sokoban.starter.AnimatedObjects" 
+  <interface id="9" language="java" name="pt.iscte.dcti.poo.sokoban.starter.ActiveObjects" 
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
-    file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/AnimatedObjects.java" 
+    file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/ActiveObjects.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="88" width="184" x="2767" y="1553"/>    
+    <position height="88" width="184" x="1486" y="400"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -105,7 +105,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/Floor.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="124" width="184" x="2204" y="1335"/>    
+    <position height="124" width="184" x="886" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -116,7 +116,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/Player.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="178" width="207" x="3109" y="1335"/>    
+    <position height="178" width="207" x="1883" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -127,7 +127,7 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/SmallStone.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="142" width="184" x="2652" y="1335"/>    
+    <position height="142" width="237" x="1606" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -138,111 +138,127 @@
     project="Sokoban_92586_92439_CatarinaMoreira_BernardoSantos" 
     file="/Sokoban_92586_92439_CatarinaMoreira_BernardoSantos/src/pt/iscte/dcti/poo/sokoban/starter/Battery.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="142" width="212" x="3592" y="1335"/>    
+    <position height="142" width="212" x="2366" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="14">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="15" name="game"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="17">    
+  <generalization id="14">    
     <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
-  <generalization id="18">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <realization id="19">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <realization id="20">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <association id="21">    
-    <bendpoint x="3834" y="1335"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="22" name="objects"/>      
-      <multiplicity id="23" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="24">    
+  <generalization id="15">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
-  <generalization id="25">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <generalization id="26">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <association id="27">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="28" name="game"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="31" name="game"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="33">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <association id="36">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="37" name="game"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="39">    
+  <generalization id="16">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
-  <association id="40">    
+  <association id="17">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="18" name="game"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="20">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="41" name="player"/>      
-      <multiplicity id="42" minimum="0" maximum="1"/>    
+      <attribute id="21" name="player"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="43">    
+  <realization id="23">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="24">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="25" name="game"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="27">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="28">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="29" name="game"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="32">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="33" name="game"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <bendpoint x="2608" y="182"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="36" name="objects"/>      
+      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="38">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="9"/>  
   </realization>  
-  <generalization id="44">    
+  <association id="39">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="40" name="game"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="43" name="game"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <realization id="46">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="50">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
