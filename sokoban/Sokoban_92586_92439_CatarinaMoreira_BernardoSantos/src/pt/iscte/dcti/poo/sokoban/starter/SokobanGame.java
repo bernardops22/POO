@@ -17,6 +17,11 @@ import pt.iul.ista.poo.utils.Point2D;
 
 public class SokobanGame implements Observer {
 
+	public static final int HEIGHT = 10;
+	public static final int WIDTH = 10;
+	
+	private static SokobanGame INSTANCE;
+	
 	private Player player;
 	private ArrayList<AbstractObjects> objects = new ArrayList<AbstractObjects>();
 	private int energy = 100;
@@ -25,7 +30,7 @@ public class SokobanGame implements Observer {
 	private int nTarget = 0;
 	private String playerName = "";
 
-	public SokobanGame(){
+	private SokobanGame(){
 		playerName();
 
 		ImageMatrixGUI.getInstance().setName("Best Sokoban Ever");
@@ -34,6 +39,12 @@ public class SokobanGame implements Observer {
 				energy + "    |    Steps: " + steps);
 
 		buildSampleLevel();
+	}
+	
+	public static SokobanGame getInstance() {
+		if (INSTANCE == null)
+			 INSTANCE = new SokobanGame();
+		return INSTANCE;
 	}
 
 	public ArrayList<AbstractObjects> getObjects() {
@@ -54,12 +65,6 @@ public class SokobanGame implements Observer {
 
 	public void setSteps(int passos) {
 		this.steps = passos;
-	}
-
-	public void removeObject(AbstractObjects object) {
-		for (AbstractObjects obj: objects) {
-			if (obj == object) objects.remove(object);
-		}
 	}
 
 	public void playerName() {
@@ -99,36 +104,35 @@ public class SokobanGame implements Observer {
 						objects.add(new Wall(new Point2D(x,y)));
 						break;
 					case "C":
-						objects.add(new Box(new Point2D(x,y),this));
+						objects.add(new Box(new Point2D(x,y)));
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "O":
-						objects.add(new Hole(new Point2D(x,y),this));
+						objects.add(new Hole(new Point2D(x,y)));
 						break;
 					case "X":
-						objects.add(new Target(new Point2D(x,y)));
+						objects.add(new Target(new Point2D(x,y),false));
 						nTarget++;
 						break;
 					case "E":
-						player = new Player(new Point2D(x,y),this);
+						player = new Player(new Point2D(x,y));
 						objects.add(new Floor(new Point2D(x,y)));
 						objects.add(player);
 						break;
 					case "b":
-						objects.add(new Battery(new Point2D(x,y),this));
+						objects.add(new Battery(new Point2D(x,y)));
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "S":
-						objects.add(new BigStone(new Point2D(x,y),this));
+						objects.add(new BigStone(new Point2D(x,y)));
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "s":
-						objects.add(new SmallStone(new Point2D(x,y),this));
+						objects.add(new SmallStone(new Point2D(x,y)));
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
-					case " ": 
+					case " ":
 						objects.add(new Floor(new Point2D(x,y)));
-						break;
 					}
 				}
 				y++;
@@ -148,28 +152,30 @@ public class SokobanGame implements Observer {
 		if(response == 0) {
 			ImageMatrixGUI.getInstance().clearImages();
 			objects.removeAll(objects);
+			nTarget = 0;
 			buildSampleLevel();
 		}
 		else {
 			ImageMatrixGUI.getInstance().dispose();
 		}
 	}
-
-	public boolean overlay() {		
-		boolean val = false;
-		while(nTarget>0) {
-			for (AbstractObjects object: objects) {
-				if (object.getName()=="Box")
-					val = ((Box)object).activate();
+	
+	//Alterar metodo
+	public boolean levelComplete() {
+		int a = 0;
+		for (AbstractObjects object: getObjects())
+			if (object.getName()=="Target" && ((Target)object).isActivation()==true) {
+				System.out.println(a);
+				a++;
 			}
-			nTarget--;
-		}
-		return val;
+					
+		if (a==nTarget)	return true;
+		else return false;
 	}
-
-	public void levelComplete() {	
-		if(overlay()==true) {
-			System.out.println("Conseguiste terminar o jogo");
+	
+	public void nextLevel() {	
+		if (levelComplete()==true) {			
+			System.out.println("You just completed the level.");
 			try {
 				FileWriter file = new FileWriter("points/punctuation.txt");
 				file.write(playerName + " " + steps + " " + nLevel);
@@ -180,6 +186,7 @@ public class SokobanGame implements Observer {
 				ImageMatrixGUI.getInstance().clearImages();
 				objects.removeAll(objects);
 				nLevel++;
+				nTarget=0;
 				buildSampleLevel();
 
 			}catch(IOException e) {}
@@ -194,10 +201,10 @@ public class SokobanGame implements Observer {
 				repeatLevel();	
 				ImageMatrixGUI.getInstance().update();
 			}
-			levelComplete();
 			if (Direction.isDirection(lastKeyPressed)) {
 				player.move(lastKeyPressed);
 				ImageMatrixGUI.getInstance().update();
+				nextLevel();
 			}
 			ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName +
 					"   |    Level: " + nLevel + "    |    Energy: " + energy + "    |    "

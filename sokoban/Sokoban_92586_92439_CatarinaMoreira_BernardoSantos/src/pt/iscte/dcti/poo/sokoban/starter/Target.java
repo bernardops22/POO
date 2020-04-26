@@ -4,8 +4,11 @@ import pt.iul.ista.poo.utils.Point2D;
 
 public class Target extends AbstractObjects {
 	
-	public Target(Point2D position) {
+	private boolean activation = false;
+	
+	public Target(Point2D position, boolean activation) {
 		super(position,true);
+		this.activation = activation;
 	}
 
 	@Override
@@ -13,8 +16,13 @@ public class Target extends AbstractObjects {
 		return "Target";
 	}
 	
-	public boolean isActivated() {
-		return false;
+	public void setActivation(boolean activation) {
+		this.activation = activation;
 	}
-		
+
+	public boolean isActivation() {
+		return activation;
+	}
+	
+	
 }

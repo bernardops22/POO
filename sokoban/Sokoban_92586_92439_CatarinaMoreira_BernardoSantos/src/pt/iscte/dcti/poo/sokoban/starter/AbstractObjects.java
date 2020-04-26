@@ -1,5 +1,7 @@
 package pt.iscte.dcti.poo.sokoban.starter;
 
+import java.util.ArrayList;
+
 import pt.iul.ista.poo.gui.ImageTile;
 import pt.iul.ista.poo.utils.Point2D;
 
@@ -7,13 +9,13 @@ public abstract class AbstractObjects implements ImageTile{
 
 	private Point2D position;
 	private boolean transposable;
-	
+
 	public AbstractObjects(Point2D position, boolean transposable) {
 		super();
 		this.position = position;
 		this.transposable = transposable;
 	}
-	
+
 	@Override
 	public String getName() {
 		return null;
@@ -36,5 +38,8 @@ public abstract class AbstractObjects implements ImageTile{
 	public boolean isTransposable() {
 		return transposable;
 	}
-	
+
+	public void setTransposable(boolean transposable) {
+		this.transposable = transposable;
+	}	
 }

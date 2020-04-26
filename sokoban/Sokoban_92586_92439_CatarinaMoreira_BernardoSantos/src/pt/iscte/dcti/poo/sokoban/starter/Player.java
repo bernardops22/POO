@@ -7,11 +7,9 @@ import pt.iul.ista.poo.utils.Point2D;
 public class Player extends AbstractObjects implements ActiveObjects{
 
 	private String imageName;
-	private SokobanGame game;
 
-	public Player(Point2D initialPosition, SokobanGame game){
+	public Player(Point2D initialPosition){
 		super(initialPosition,false);
-		this.game = game;
 		imageName = "Player_U";
 	}
 
@@ -46,21 +44,23 @@ public class Player extends AbstractObjects implements ActiveObjects{
 			imageName ="Player_D";
 			break;
 		}
+		
+		SokobanGame game = SokobanGame.getInstance();
 
 		for(AbstractObjects object: game.getObjects()) {
-			if (newPosition.getX()>=0 && newPosition.getX()<10 && newPosition.getY()>=0 
-					&& newPosition.getY()<10 && object.getPosition().equals(newPosition)) {
+			if (newPosition.getX()>=0 && newPosition.getX()<SokobanGame.WIDTH && newPosition.getY()>=0 
+					&& newPosition.getY()<SokobanGame.HEIGHT && object.getPosition().equals(newPosition)) {
 				if (object.isTransposable()){
 					setPosition(newPosition);
+					
 					game.setSteps(game.getSteps() + 1);
 					game.setEnergy(game.getEnergy() - 1);
 					System.out.println(getPosition() + " " + imageName + " " + lastKeyPressed);
+					
+					if(object.getName()=="Battery")((Battery)object).overlap();
+					if(object.getName()=="Hole")((Hole)object).disappear();
 				}
-				if(object.getName()=="Hole")((Hole)object).disappear();
 				if(object.getName()=="Box")((Box)object).move(lastKeyPressed);
-				if(object.getName()=="Battery")((Battery)object).overlap();
-				if(object.getName()=="BigStone")((BigStone)object).move(lastKeyPressed);
-				if(object.getName()=="SmallStone")((SmallStone)object).move(lastKeyPressed);
 			}
 		}			
 	}

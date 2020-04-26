@@ -7,8 +7,7 @@ public class Main {
 	public static void main(String[] args){
 		
 		ImageMatrixGUI.setSize(10, 10);
-		SokobanGame s = new SokobanGame();
-		ImageMatrixGUI.getInstance().registerObserver(s);
+		ImageMatrixGUI.getInstance().registerObserver(SokobanGame.getInstance());
 		ImageMatrixGUI.getInstance().go();
 
 	}
