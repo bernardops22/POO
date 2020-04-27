@@ -5,8 +5,11 @@ import pt.iul.ista.poo.utils.Point2D;
 
 public class Box extends AbstractObjects implements ActiveObjects{
 
-	public Box(Point2D position) {
+	private boolean activation = false;
+	
+	public Box(Point2D position, boolean activation) {
 		super(position,false);
+		this.activation = activation;
 	}
 
 	@Override
@@ -18,6 +21,14 @@ public class Box extends AbstractObjects implements ActiveObjects{
 	public int getLayer() {
 		return 2;
 	}
+	
+	public boolean isActivation() {
+		return activation;
+	}
+	
+	public void setActivation(boolean activation) {
+		this.activation = activation;
+	}
 
 	@Override
 	public void move(int lastKeyPressed) {
@@ -28,10 +39,10 @@ public class Box extends AbstractObjects implements ActiveObjects{
 		for(AbstractObjects object : game.getObjects()) {
 			if(object.isTransposable() && object.getPosition().equals(newPosition)) {
 					setPosition (newPosition);
+					setActivation(false);
 					if (object.getName() == "Target")
-						((Target)object).setActivation(true);
+						setActivation(true);
 				}
 		}
 	}
-
 }

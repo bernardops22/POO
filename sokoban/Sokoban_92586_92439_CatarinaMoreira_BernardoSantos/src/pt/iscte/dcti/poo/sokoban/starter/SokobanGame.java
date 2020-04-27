@@ -104,14 +104,14 @@ public class SokobanGame implements Observer {
 						objects.add(new Wall(new Point2D(x,y)));
 						break;
 					case "C":
-						objects.add(new Box(new Point2D(x,y)));
+						objects.add(new Box(new Point2D(x,y),false));
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "O":
 						objects.add(new Hole(new Point2D(x,y)));
 						break;
 					case "X":
-						objects.add(new Target(new Point2D(x,y),false));
+						objects.add(new Target(new Point2D(x,y)));
 						nTarget++;
 						break;
 					case "E":
@@ -155,20 +155,16 @@ public class SokobanGame implements Observer {
 			nTarget = 0;
 			buildSampleLevel();
 		}
-		else {
-			ImageMatrixGUI.getInstance().dispose();
-		}
+		else ImageMatrixGUI.getInstance().dispose();
 	}
 	
-	//Alterar metodo
 	public boolean levelComplete() {
 		int a = 0;
 		for (AbstractObjects object: getObjects())
-			if (object.getName()=="Target" && ((Target)object).isActivation()==true) {
+			if (object.getName()=="Box" && ((Box)object).isActivation()==true) {
 				System.out.println(a);
 				a++;
 			}
-					
 		if (a==nTarget)	return true;
 		else return false;
 	}
