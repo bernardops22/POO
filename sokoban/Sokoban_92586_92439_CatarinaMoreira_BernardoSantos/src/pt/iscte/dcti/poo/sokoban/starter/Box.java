@@ -5,11 +5,11 @@ import pt.iul.ista.poo.utils.Point2D;
 
 public class Box extends AbstractObjects implements ActiveObjects{
 
-	private boolean activation = false;
-	
-	public Box(Point2D position, boolean activation) {
+	private boolean activated = false;
+
+	public Box(Point2D position, boolean activated) {
 		super(position,false);
-		this.activation = activation;
+		this.activated = activated;
 	}
 
 	@Override
@@ -21,28 +21,29 @@ public class Box extends AbstractObjects implements ActiveObjects{
 	public int getLayer() {
 		return 2;
 	}
-	
-	public boolean isActivation() {
-		return activation;
+
+	public boolean isActivated() {
+		return activated;
 	}
-	
-	public void setActivation(boolean activation) {
-		this.activation = activation;
+
+	public void setActivation(boolean activated) {
+		this.activated = activated;
 	}
 
 	@Override
 	public void move(int lastKeyPressed) {
-		
 		SokobanGame game = SokobanGame.getInstance();
-		//NAO DESATIVA QUANDO SAI DO SITIO
 		Point2D newPosition = getPosition().plus(Direction.directionFor(lastKeyPressed).asVector());
 		for(AbstractObjects object : game.getObjects()) {
-			if(object.isTransposable() && object.getPosition().equals(newPosition)) {
+//			if (object.getPosition().equals(newPosition) && !object.canMove());
+//				object.setMove(false);
+			
+			if(object.getPosition().equals(newPosition) && object.isTransposable()) {
 					setPosition (newPosition);
 					setActivation(false);
 					if (object.getName() == "Target")
 						setActivation(true);
-				}
+			}
 		}
 	}
 }

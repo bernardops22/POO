@@ -3,7 +3,7 @@ package pt.iscte.dcti.poo.sokoban.starter;
 import pt.iul.ista.poo.gui.ImageMatrixGUI;
 import pt.iul.ista.poo.utils.Point2D;
 
-public class Battery extends AbstractObjects{
+public class Battery extends AbstractObjects implements InteractiveObjects{
 	
 	public Battery(Point2D position){
 		super(position,true);
@@ -19,15 +19,19 @@ public class Battery extends AbstractObjects{
 		return 2;
 	}
 
-	public void overlap() {
-		SokobanGame game = SokobanGame.getInstance();
+	@Override
+	public void interact() {
+			SokobanGame game = SokobanGame.getInstance();
 		
 		for (AbstractObjects object: game.getObjects())
 			if (object.getName()==getName()) {
 				game.setEnergy(101);
 				ImageMatrixGUI.getInstance().removeImage(object);
 				object.setTransposable(false);
-			}		
+			}	
+		
 	}
+	
+	
 	
 }

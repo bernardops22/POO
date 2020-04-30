@@ -44,7 +44,7 @@ public class Player extends AbstractObjects implements ActiveObjects{
 			imageName ="Player_D";
 			break;
 		}
-		
+
 		SokobanGame game = SokobanGame.getInstance();
 
 		for(AbstractObjects object: game.getObjects()) {
@@ -52,15 +52,15 @@ public class Player extends AbstractObjects implements ActiveObjects{
 					&& newPosition.getY()<SokobanGame.HEIGHT && object.getPosition().equals(newPosition)) {
 				if (object.isTransposable()){
 					setPosition(newPosition);
-					
+
 					game.setSteps(game.getSteps() + 1);
 					game.setEnergy(game.getEnergy() - 1);
 					System.out.println(getPosition() + " " + imageName + " " + lastKeyPressed);
-					
-					if(object.getName()=="Battery")((Battery)object).overlap();
-					if(object.getName()=="Hole")((Hole)object).disappear();
+
+					if(object.getName()=="Battery")((Battery)object).interact();
+					if(object.getName()=="Hole")((Hole)object).interact();
 				}
-				if(object.getName()=="Box")((Box)object).move(lastKeyPressed);
+				if (object.getName()=="Box") ((Box)object).move(lastKeyPressed);
 			}
 		}			
 	}

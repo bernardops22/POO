@@ -16,9 +16,11 @@ import pt.iul.ista.poo.utils.Direction;
 import pt.iul.ista.poo.utils.Point2D;
 
 public class SokobanGame implements Observer {
-
+	
+	//Magic numbers
 	public static final int HEIGHT = 10;
 	public static final int WIDTH = 10;
+	private static final int NUMBER_OF_LEVELS = 2; //Max number of levels to play
 	
 	private static SokobanGame INSTANCE;
 	
@@ -29,7 +31,8 @@ public class SokobanGame implements Observer {
 	private int nLevel = 0;
 	private int nTarget = 0;
 	private String playerName = "";
-
+	
+	//Constructor
 	private SokobanGame(){
 		playerName();
 
@@ -41,12 +44,14 @@ public class SokobanGame implements Observer {
 		buildSampleLevel();
 	}
 	
+	//Singleton
 	public static SokobanGame getInstance() {
 		if (INSTANCE == null)
 			 INSTANCE = new SokobanGame();
 		return INSTANCE;
 	}
-
+	
+	//Getters and setters
 	public ArrayList<AbstractObjects> getObjects() {
 		return objects;
 	}
@@ -66,7 +71,8 @@ public class SokobanGame implements Observer {
 	public void setSteps(int passos) {
 		this.steps = passos;
 	}
-
+	
+	//Player info
 	public void playerName() {
 		String response = JOptionPane.showInputDialog(null,"What is your name?",
 				"Sokoban by Hiroyuki Imabayashi (1981)",JOptionPane.QUESTION_MESSAGE);
@@ -78,7 +84,8 @@ public class SokobanGame implements Observer {
 		}
 		playerName = response;
 	}
-
+	
+	//Build the level
 	public void buildSampleLevel() {
 		try {
 
@@ -89,7 +96,8 @@ public class SokobanGame implements Observer {
 			String line;
 			String[] symbols;
 			int y = 0;
-
+			
+			this.nTarget=0;
 			this.steps=0;
 			this.energy=100;
 
@@ -144,7 +152,8 @@ public class SokobanGame implements Observer {
 		}catch (FileNotFoundException e){
 		}
 	}
-
+	
+	//When the user loses 
 	public void repeatLevel() {
 		Object[] options = {"Repeat level","Leave"};
 		int response = JOptionPane.showOptionDialog(null,"What do you want to do?","GAME OVER",
@@ -152,25 +161,26 @@ public class SokobanGame implements Observer {
 		if(response == 0) {
 			ImageMatrixGUI.getInstance().clearImages();
 			objects.removeAll(objects);
-			nTarget = 0;
 			buildSampleLevel();
 		}
 		else ImageMatrixGUI.getInstance().dispose();
 	}
 	
-	public boolean levelComplete() {
+	//Targets activated?
+	public boolean levelCompleted() {
 		int a = 0;
 		for (AbstractObjects object: getObjects())
-			if (object.getName()=="Box" && ((Box)object).isActivation()==true) {
-				System.out.println(a);
+			if (object.getName()=="Box" && ((Box)object).isActivated()==true) {
+//				System.out.println(a);
 				a++;
 			}
 		if (a==nTarget)	return true;
 		else return false;
 	}
 	
+	//When the user completes a level
 	public void nextLevel() {	
-		if (levelComplete()==true) {			
+		if (levelCompleted()==true) {			
 			System.out.println("You just completed the level.");
 			try {
 				FileWriter file = new FileWriter("points/punctuation.txt");
@@ -182,26 +192,35 @@ public class SokobanGame implements Observer {
 				ImageMatrixGUI.getInstance().clearImages();
 				objects.removeAll(objects);
 				nLevel++;
-				nTarget=0;
+				
+				//Level limitation
+				if (nLevel>NUMBER_OF_LEVELS) {
+					nLevel = NUMBER_OF_LEVELS;
+					JOptionPane.showMessageDialog(null, "You completed every single level in this game.");
+					repeatLevel();
+				}
+				
 				buildSampleLevel();
+				ImageMatrixGUI.getInstance().update();
 
 			}catch(IOException e) {}
 		}
 	}
-
+	
+	//When the user presses a key
 	@Override
 	public void update(Observed arg0) {
 		int lastKeyPressed = ((ImageMatrixGUI)arg0).keyPressed();
 		if (player != null) {
+			if (Direction.isDirection(lastKeyPressed)) {
+				player.move(lastKeyPressed);
+				ImageMatrixGUI.getInstance().update();
+			}
 			if(energy==0 || lastKeyPressed == KeyEvent.VK_R || lastKeyPressed == KeyEvent.VK_ESCAPE) {
 				repeatLevel();	
 				ImageMatrixGUI.getInstance().update();
 			}
-			if (Direction.isDirection(lastKeyPressed)) {
-				player.move(lastKeyPressed);
-				ImageMatrixGUI.getInstance().update();
-				nextLevel();
-			}
+			nextLevel();
 			ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName +
 					"   |    Level: " + nLevel + "    |    Energy: " + energy + "    |    "
 					+ "Steps: " + steps);
