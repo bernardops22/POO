@@ -1,13 +1,13 @@
 package pt.iscte.dcti.poo.sokoban.starter;
 
 import pt.iul.ista.poo.gui.ImageTile;
+import pt.iul.ista.poo.utils.Direction;
 import pt.iul.ista.poo.utils.Point2D;
 
 public abstract class AbstractObjects implements ImageTile{
 
 	private Point2D position;
 	private boolean transposable;
-//	private boolean move;
 
 	public AbstractObjects(Point2D position, boolean transposable) {
 		super();
@@ -41,12 +41,15 @@ public abstract class AbstractObjects implements ImageTile{
 	public void setTransposable(boolean transposable) {
 		this.transposable = transposable;
 	}
-//	
-//	public boolean canMove() {
-//		return move;
-//	}
-//	
-//	public void setMove(boolean move) {
-//		this.move = move;
-//	}
+
+	//NEW
+	public boolean canMove(int lastKeyPressed) {
+		Point2D newPosition = getPosition().plus(Direction.directionFor(lastKeyPressed).asVector());
+		SokobanGame game = SokobanGame.getInstance();
+		for(AbstractObjects object : game.getObjects())
+			if(object.getPosition().equals(newPosition) && !object.equals(this) && object.getName()!="Player")
+				if (object.getName() == "Wall" || object.getLayer()>=getLayer())
+					return false;
+		return true;
+	}
 }

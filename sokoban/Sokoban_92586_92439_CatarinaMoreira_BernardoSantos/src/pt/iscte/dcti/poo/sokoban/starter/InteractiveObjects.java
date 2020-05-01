@@ -4,4 +4,6 @@ public interface InteractiveObjects {
 	
 	public void interact();
 	
+	public boolean canInteract();
+	
 }

@@ -22,11 +22,11 @@ public class Box extends AbstractObjects implements ActiveObjects{
 		return 2;
 	}
 
-	public boolean isActivated() {
+	public boolean isTargetActivated() {
 		return activated;
 	}
 
-	public void setActivation(boolean activated) {
+	public void setTargetActivation(boolean activated) {
 		this.activated = activated;
 	}
 
@@ -34,15 +34,15 @@ public class Box extends AbstractObjects implements ActiveObjects{
 	public void move(int lastKeyPressed) {
 		SokobanGame game = SokobanGame.getInstance();
 		Point2D newPosition = getPosition().plus(Direction.directionFor(lastKeyPressed).asVector());
+		
 		for(AbstractObjects object : game.getObjects()) {
-//			if (object.getPosition().equals(newPosition) && !object.canMove());
-//				object.setMove(false);
-			
-			if(object.getPosition().equals(newPosition) && object.isTransposable()) {
+			if(object.getPosition().equals(newPosition) && !object.equals(this) && object.getName()!="Wall"){
+				if((object.canMove(lastKeyPressed)  || object.isTransposable())) {
 					setPosition (newPosition);
-					setActivation(false);
+					setTargetActivation(false);
 					if (object.getName() == "Target")
-						setActivation(true);
+						setTargetActivation(true);
+				}
 			}
 		}
 	}

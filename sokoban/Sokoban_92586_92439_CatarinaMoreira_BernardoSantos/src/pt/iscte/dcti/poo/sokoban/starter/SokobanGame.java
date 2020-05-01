@@ -116,7 +116,7 @@ public class SokobanGame implements Observer {
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "O":
-						objects.add(new Hole(new Point2D(x,y)));
+						objects.add(new Hole(new Point2D(x,y),true));
 						break;
 					case "X":
 						objects.add(new Target(new Point2D(x,y)));
@@ -128,7 +128,7 @@ public class SokobanGame implements Observer {
 						objects.add(player);
 						break;
 					case "b":
-						objects.add(new Battery(new Point2D(x,y)));
+						objects.add(new Battery(new Point2D(x,y),true));
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
 					case "S":
@@ -170,7 +170,7 @@ public class SokobanGame implements Observer {
 	public boolean levelCompleted() {
 		int a = 0;
 		for (AbstractObjects object: getObjects())
-			if (object.getName()=="Box" && ((Box)object).isActivated()==true) {
+			if (object.getName()=="Box" && ((Box)object).isTargetActivated()==true) {
 //				System.out.println(a);
 				a++;
 			}
@@ -216,7 +216,7 @@ public class SokobanGame implements Observer {
 				player.move(lastKeyPressed);
 				ImageMatrixGUI.getInstance().update();
 			}
-			if(energy==0 || lastKeyPressed == KeyEvent.VK_R || lastKeyPressed == KeyEvent.VK_ESCAPE) {
+			if(energy<=0 || lastKeyPressed == KeyEvent.VK_R || lastKeyPressed == KeyEvent.VK_ESCAPE) {
 				repeatLevel();	
 				ImageMatrixGUI.getInstance().update();
 			}
