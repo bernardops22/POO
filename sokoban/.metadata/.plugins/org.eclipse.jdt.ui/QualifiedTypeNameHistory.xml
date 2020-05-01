@@ -11,10 +11,10 @@
     <fullyQualifiedTypeName name="pt.iscte.dcti.poo.sokoban.starter.Battery"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageTile"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
-    <fullyQualifiedTypeName name="javax.swing.text.Position"/>
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Direction"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageMatrixGUI"/>
+    <fullyQualifiedTypeName name="javax.swing.text.Position"/>
 </qualifiedTypeNameHistroy>

@@ -8,6 +8,7 @@
 			<item value=""/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="C:\Users\bphsa\Downloads\StarterPack2020_V2.zip"/>
 			<item value="C:\Users\bphsa\Downloads\Sokoban2020_CatarinaMoreira_92586_BernardoSantos_92439.zip"/>
 			<item value="C:\Users\bphsa\Downloads\StarterPack2020.zip"/>
 		</list>
@@ -18,6 +19,8 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\bphsa\OneDrive - ISCTE-IUL\GitHub\POO\sokoban\GraphPack_2019_2020_V1"/>
+			<item value="C:\Users\bphsa\OneDrive - ISCTE-IUL\GitHub\POO\sokoban\GraphPack_2019_2020_V1_2"/>
 			<item value="D:\Sokoban_92586_92439_CatarinaMoreira_BernardoSantos"/>
 			<item value="C:\Users\bphsa\OneDrive - ISCTE-IUL\GitHub\POO\sokoban\Sokoban2020_CatarinaMoreira_92586_BernardoSantos_92439"/>
 			<item value="D:\workspace-poo"/>
