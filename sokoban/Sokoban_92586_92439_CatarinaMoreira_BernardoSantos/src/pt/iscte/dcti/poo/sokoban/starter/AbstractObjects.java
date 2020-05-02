@@ -48,8 +48,7 @@ public abstract class AbstractObjects implements ImageTile{
 		SokobanGame game = SokobanGame.getInstance();
 		for(AbstractObjects object : game.getObjects())
 			if(object.getPosition().equals(newPosition) && !object.equals(this) && object.getName()!="Player")
-				if (object.getName() == "Wall" || object.getLayer()>=getLayer())
-					return false;
+				if (object.getLayer()>=getLayer()) return false;
 		return true;
 	}
 }

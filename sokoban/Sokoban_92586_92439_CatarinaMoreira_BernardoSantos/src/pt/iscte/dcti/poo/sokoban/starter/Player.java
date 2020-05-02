@@ -52,16 +52,13 @@ public class Player extends AbstractObjects implements ActiveObjects{
 		for(AbstractObjects object: game.getObjects()) {
 			if (newPosition.getX()>=0 && newPosition.getX()<SokobanGame.WIDTH && newPosition.getY()>=0 
 					&& newPosition.getY()<SokobanGame.HEIGHT && object.getPosition().equals(newPosition)
-					&& !object.equals(this) && object.getName() != "Wall") {
-				
-				if (object instanceof InteractiveObjects && ((InteractiveObjects) object).canInteract())
-					((InteractiveObjects)object).interact();
+					&& !object.equals(this)) {
 				
 				if(object.canMove(lastKeyPressed)) {
 					if (object instanceof ActiveObjects)
 						((ActiveObjects)object).move(lastKeyPressed);
 				}
-
+				
 				if (canMove(lastKeyPressed)){
 
 					setPosition(newPosition);
@@ -71,6 +68,10 @@ public class Player extends AbstractObjects implements ActiveObjects{
 
 					System.out.println(getPosition() + " " + imageName + " " + lastKeyPressed);
 					System.out.println();
+				}
+				
+				if (object instanceof InteractiveObjects && ((InteractiveObjects) object).canInteract()) {
+					((InteractiveObjects)object).interact();
 				}
 			}
 		}

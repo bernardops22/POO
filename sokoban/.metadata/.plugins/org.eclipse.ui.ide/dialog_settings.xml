@@ -19,6 +19,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\bphsa\OneDrive - ISCTE-IUL\GitHub\POO\sokoban\Sokoban_92586_92439_CatarinaMoreira_BernardoSantos"/>
 			<item value="C:\Users\bphsa\OneDrive - ISCTE-IUL\GitHub\POO\sokoban\GraphPack_2019_2020_V1"/>
 			<item value="C:\Users\bphsa\OneDrive - ISCTE-IUL\GitHub\POO\sokoban\GraphPack_2019_2020_V1_2"/>
 			<item value="D:\Sokoban_92586_92439_CatarinaMoreira_BernardoSantos"/>

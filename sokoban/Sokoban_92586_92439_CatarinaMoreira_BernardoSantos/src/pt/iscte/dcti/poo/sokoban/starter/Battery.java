@@ -20,7 +20,7 @@ public class Battery extends AbstractObjects implements InteractiveObjects{
 
 	@Override
 	public int getLayer() {
-		return 2;
+		return 1;
 	}
 
 	public boolean canInteract() {
@@ -34,7 +34,7 @@ public class Battery extends AbstractObjects implements InteractiveObjects{
 	@Override
 	public void interact() {
 		SokobanGame game = SokobanGame.getInstance();
-		game.setEnergy(101);
+		game.setEnergy(100);
 		ImageMatrixGUI.getInstance().removeImage(this);
 		setInteract(false);
 	}

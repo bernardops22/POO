@@ -15,7 +15,7 @@ public class Wall extends AbstractObjects{
 
 	@Override
 	public int getLayer() {
-		return 4;
+		return 2;
 	}
 	
 }

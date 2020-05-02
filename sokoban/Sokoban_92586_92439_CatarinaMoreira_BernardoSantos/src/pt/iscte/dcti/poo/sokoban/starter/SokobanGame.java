@@ -139,6 +139,20 @@ public class SokobanGame implements Observer {
 						objects.add(new SmallStone(new Point2D(x,y)));
 						objects.add(new Floor(new Point2D(x,y)));
 						break;
+					case "g":
+						objects.add(new Ice(new Point2D(x,y)));
+						break;
+					case "%":
+						objects.add(new BrittleWall(new Point2D(x,y)));
+						objects.add(new Floor(new Point2D(x,y)));
+						break;
+					case "m":
+						objects.add(new Hammer (new Point2D(x,y)));
+						objects.add(new Floor(new Point2D(x,y)));
+						break;
+					case "t":
+						objects.add(new Teleport(new Point2D(x,y)));
+						break;
 					case " ":
 						objects.add(new Floor(new Point2D(x,y)));
 					}
