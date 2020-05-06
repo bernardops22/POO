@@ -4,13 +4,9 @@ import pt.iul.ista.poo.gui.ImageMatrixGUI;
 import pt.iul.ista.poo.utils.Point2D;
 
 public class Battery extends AbstractObjects implements InteractiveObjects{
-
-	private boolean canInteract;
 	
 	public Battery(Point2D position, boolean canInteract){
-		super(position,true);
-		this.canInteract = canInteract;
-		
+		super(position,true,true);		
 	}
 
 	@Override
@@ -18,18 +14,6 @@ public class Battery extends AbstractObjects implements InteractiveObjects{
 		return "Battery";
 	}
 
-	@Override
-	public int getLayer() {
-		return 1;
-	}
-
-	public boolean canInteract() {
-		return canInteract;
-	}
-
-	public void setInteract(boolean canInteract) {
-		this.canInteract = canInteract;
-	}
 
 	@Override
 	public void interact() {

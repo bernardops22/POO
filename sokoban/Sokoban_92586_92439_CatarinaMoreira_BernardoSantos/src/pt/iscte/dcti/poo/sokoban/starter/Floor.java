@@ -4,7 +4,7 @@ import pt.iul.ista.poo.utils.Point2D;
 public class Floor extends AbstractObjects{
 	
 	public Floor(Point2D position){
-		super(position,true);
+		super(position,true,false);
 	}
 	
 	@Override

@@ -31,6 +31,7 @@ public class SokobanGame implements Observer {
 	private int nLevel = 0;
 	private int nTarget = 0;
 	private String playerName = "";
+	private boolean hammer;
 	
 	//Constructor
 	private SokobanGame(){
@@ -39,7 +40,7 @@ public class SokobanGame implements Observer {
 		ImageMatrixGUI.getInstance().setName("Best Sokoban Ever");
 		ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName + 
 				"   |    Level: " + nLevel + "    |    Energy: " + 
-				energy + "    |    Steps: " + steps);
+				energy + "    |    Steps: " + steps + "    |    R/ESC to restart!");
 
 		buildSampleLevel();
 	}
@@ -54,6 +55,16 @@ public class SokobanGame implements Observer {
 	//Getters and setters
 	public ArrayList<AbstractObjects> getObjects() {
 		return objects;
+	}
+	
+	//NEW
+	public boolean hasHammer() {
+		return hammer;
+	}
+	
+	//NEW
+	public void setHammer(boolean hammer) {
+		this.hammer = hammer;
 	}
 
 	public int getEnergy() {
@@ -87,6 +98,7 @@ public class SokobanGame implements Observer {
 	
 	//Build the level
 	public void buildSampleLevel() {
+		setHammer(false);
 		try {
 
 			String filename = "levels/level" + nLevel + ".txt";
@@ -226,10 +238,13 @@ public class SokobanGame implements Observer {
 	public void update(Observed arg0) {
 		int lastKeyPressed = ((ImageMatrixGUI)arg0).keyPressed();
 		if (player != null) {
+			
 			if (Direction.isDirection(lastKeyPressed)) {
 				player.move(lastKeyPressed);
 				ImageMatrixGUI.getInstance().update();
 			}
+			
+			
 			if(energy<=0 || lastKeyPressed == KeyEvent.VK_R || lastKeyPressed == KeyEvent.VK_ESCAPE) {
 				repeatLevel();	
 				ImageMatrixGUI.getInstance().update();
@@ -237,7 +252,7 @@ public class SokobanGame implements Observer {
 			nextLevel();
 			ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName +
 					"   |    Level: " + nLevel + "    |    Energy: " + energy + "    |    "
-					+ "Steps: " + steps);
+					+ "Steps: " + steps + "    |    R to restart!");
 		}
 	}
 }

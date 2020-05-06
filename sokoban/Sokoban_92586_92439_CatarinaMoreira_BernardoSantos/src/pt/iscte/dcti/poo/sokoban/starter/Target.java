@@ -5,13 +5,11 @@ import pt.iul.ista.poo.utils.Point2D;
 public class Target extends AbstractObjects {
 	
 	public Target(Point2D position) {
-		super(position,true);
+		super(position,true,false);
 	}
 
 	@Override
 	public String getName() {
 		return "Target";
-	}
-	
-	
+	}	
 }

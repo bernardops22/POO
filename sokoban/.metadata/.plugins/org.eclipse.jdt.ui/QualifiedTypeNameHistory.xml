@@ -14,7 +14,7 @@
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javax.swing.text.Position"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.utils.Direction"/>
     <fullyQualifiedTypeName name="pt.iul.ista.poo.gui.ImageMatrixGUI"/>
-    <fullyQualifiedTypeName name="javax.swing.text.Position"/>
 </qualifiedTypeNameHistroy>

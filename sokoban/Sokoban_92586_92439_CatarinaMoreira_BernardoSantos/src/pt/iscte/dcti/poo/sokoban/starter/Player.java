@@ -2,6 +2,7 @@ package pt.iscte.dcti.poo.sokoban.starter;
 
 import java.awt.event.KeyEvent;
 
+import pt.iul.ista.poo.gui.ImageMatrixGUI;
 import pt.iul.ista.poo.utils.Direction;
 import pt.iul.ista.poo.utils.Point2D;
 
@@ -11,7 +12,7 @@ public class Player extends AbstractObjects implements ActiveObjects{
 
 	public Player(Point2D initialPosition){
 		//NEW LAYER PART
-		super(initialPosition,false);
+		super(initialPosition,false,false);
 		imageName = "Player_U";
 	}
 
@@ -19,7 +20,7 @@ public class Player extends AbstractObjects implements ActiveObjects{
 	public String getName() {
 		return imageName;
 	}
-
+	
 	@Override
 	public int getLayer() {
 		return 2;
@@ -52,13 +53,12 @@ public class Player extends AbstractObjects implements ActiveObjects{
 		for(AbstractObjects object: game.getObjects()) {
 			if (newPosition.getX()>=0 && newPosition.getX()<SokobanGame.WIDTH && newPosition.getY()>=0 
 					&& newPosition.getY()<SokobanGame.HEIGHT && object.getPosition().equals(newPosition)
-					&& !object.equals(this)) {
+					&& object.hashCode()!=hashCode()) {
 				
-				if(object.canMove(lastKeyPressed)) {
+				if(object.canMove(lastKeyPressed))
 					if (object instanceof ActiveObjects)
 						((ActiveObjects)object).move(lastKeyPressed);
-				}
-				
+
 				if (canMove(lastKeyPressed)){
 
 					setPosition(newPosition);
@@ -70,9 +70,10 @@ public class Player extends AbstractObjects implements ActiveObjects{
 					System.out.println();
 				}
 				
-				if (object instanceof InteractiveObjects && ((InteractiveObjects) object).canInteract()) {
+				if (object instanceof InteractiveObjects && object.canInteract())
 					((InteractiveObjects)object).interact();
-				}
+
+				
 			}
 		}
 	}	

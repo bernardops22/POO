@@ -1,24 +1,26 @@
 package pt.iscte.dcti.poo.sokoban.starter;
 
+import pt.iul.ista.poo.gui.ImageMatrixGUI;
 import pt.iul.ista.poo.utils.Point2D;
 
 public class Hammer extends AbstractObjects implements InteractiveObjects{
 
 	public Hammer(Point2D position) {
-		super(position, true);
-		// TODO Auto-generated constructor stub
+		super(position, true,true);
 	}
-
+	
+	@Override
+	public String getName() {
+		return "Hammer";
+	}
+	
 	@Override
 	public void interact() {
-		// TODO Auto-generated method stub
-		
+		SokobanGame game = SokobanGame.getInstance();
+		game.setHammer(true);
+		ImageMatrixGUI.getInstance().removeImage(this);
+		setInteract(false);
 	}
 
-	@Override
-	public boolean canInteract() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

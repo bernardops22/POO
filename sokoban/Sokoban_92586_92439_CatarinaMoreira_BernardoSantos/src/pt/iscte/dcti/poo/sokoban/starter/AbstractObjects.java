@@ -8,11 +8,13 @@ public abstract class AbstractObjects implements ImageTile{
 
 	private Point2D position;
 	private boolean transposable;
+	private boolean interact;
 
-	public AbstractObjects(Point2D position, boolean transposable) {
+	public AbstractObjects(Point2D position, boolean transposable, boolean interact) {
 		super();
 		this.position = position;
 		this.transposable = transposable;
+		this.interact = interact;
 	}
 
 	@Override
@@ -37,9 +39,17 @@ public abstract class AbstractObjects implements ImageTile{
 	public boolean isTransposable() {
 		return transposable;
 	}
-
+	
 	public void setTransposable(boolean transposable) {
-		this.transposable = transposable;
+		this.transposable=transposable;
+	}
+	
+	public boolean canInteract() {
+		return interact;
+	}
+
+	public void setInteract(boolean interact) {
+		this.interact = interact;
 	}
 
 	//NEW
@@ -47,8 +57,8 @@ public abstract class AbstractObjects implements ImageTile{
 		Point2D newPosition = getPosition().plus(Direction.directionFor(lastKeyPressed).asVector());
 		SokobanGame game = SokobanGame.getInstance();
 		for(AbstractObjects object : game.getObjects())
-			if(object.getPosition().equals(newPosition) && !object.equals(this) && object.getName()!="Player")
-				if (object.getLayer()>=getLayer()) return false;
+			if(object.getPosition().equals(newPosition) && object.hashCode()!=hashCode())
+				if (!object.isTransposable()) return false;
 		return true;
 	}
 }
