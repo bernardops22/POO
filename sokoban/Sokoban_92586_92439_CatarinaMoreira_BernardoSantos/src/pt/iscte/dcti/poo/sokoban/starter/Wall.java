@@ -12,10 +12,5 @@ public class Wall extends AbstractObjects{
 	public String getName() {
 		return "Wall";
 	}
-
-	@Override
-	public int getLayer() {
-		return 2;
-	}
 	
 }

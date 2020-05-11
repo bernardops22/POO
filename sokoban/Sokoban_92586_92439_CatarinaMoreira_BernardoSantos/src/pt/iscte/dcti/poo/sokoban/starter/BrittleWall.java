@@ -15,19 +15,12 @@ public class BrittleWall extends AbstractObjects implements InteractiveObjects{
 	}
 
 	@Override
-	public int getLayer() {
-		return 2;
-	}
-
-	@Override
-	public void interact() {
+	public void interact(AbstractObjects object) {
 		SokobanGame game = SokobanGame.getInstance();
-		setTransposable(false);
+		System.out.println(game.hasHammer());
 		if (game.hasHammer()) {
 			ImageMatrixGUI.getInstance().removeImage(this);
-			setInteract(false);
 			setTransposable(true);
 		}
 	}
-
 }

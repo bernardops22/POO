@@ -16,14 +16,14 @@ import pt.iul.ista.poo.utils.Direction;
 import pt.iul.ista.poo.utils.Point2D;
 
 public class SokobanGame implements Observer {
-	
+
 	//Magic numbers
 	public static final int HEIGHT = 10;
 	public static final int WIDTH = 10;
-	private static final int NUMBER_OF_LEVELS = 2; //Max number of levels to play
-	
+	private static final int NUMBER_OF_LEVELS = 4; //Max number of levels to play
+
 	private static SokobanGame INSTANCE;
-	
+
 	private Player player;
 	private ArrayList<AbstractObjects> objects = new ArrayList<AbstractObjects>();
 	private int energy = 100;
@@ -32,7 +32,7 @@ public class SokobanGame implements Observer {
 	private int nTarget = 0;
 	private String playerName = "";
 	private boolean hammer;
-	
+
 	//Constructor
 	private SokobanGame(){
 		playerName();
@@ -44,24 +44,29 @@ public class SokobanGame implements Observer {
 
 		buildSampleLevel();
 	}
-	
+
 	//Singleton
 	public static SokobanGame getInstance() {
 		if (INSTANCE == null)
-			 INSTANCE = new SokobanGame();
+			INSTANCE = new SokobanGame();
 		return INSTANCE;
 	}
-	
+
 	//Getters and setters
-	public ArrayList<AbstractObjects> getObjects() {
-		return objects;
+	public ArrayList<AbstractObjects> getObjects(Point2D position) {
+		ArrayList<AbstractObjects> objsp = new ArrayList<AbstractObjects>();
+		for(AbstractObjects object: objects) {
+			if (object.getPosition().equals(position))
+				objsp.add(object);
+		}
+		return objsp;
 	}
-	
+
 	//NEW
 	public boolean hasHammer() {
 		return hammer;
 	}
-	
+
 	//NEW
 	public void setHammer(boolean hammer) {
 		this.hammer = hammer;
@@ -82,7 +87,7 @@ public class SokobanGame implements Observer {
 	public void setSteps(int passos) {
 		this.steps = passos;
 	}
-	
+
 	//Player info
 	public void playerName() {
 		String response = JOptionPane.showInputDialog(null,"What is your name?",
@@ -95,7 +100,7 @@ public class SokobanGame implements Observer {
 		}
 		playerName = response;
 	}
-	
+
 	//Build the level
 	public void buildSampleLevel() {
 		setHammer(false);
@@ -108,7 +113,7 @@ public class SokobanGame implements Observer {
 			String line;
 			String[] symbols;
 			int y = 0;
-			
+
 			this.nTarget=0;
 			this.steps=0;
 			this.energy=100;
@@ -178,7 +183,7 @@ public class SokobanGame implements Observer {
 		}catch (FileNotFoundException e){
 		}
 	}
-	
+
 	//When the user loses 
 	public void repeatLevel() {
 		Object[] options = {"Repeat level","Leave"};
@@ -191,22 +196,21 @@ public class SokobanGame implements Observer {
 		}
 		else ImageMatrixGUI.getInstance().dispose();
 	}
-	
+
 	//Targets activated?
 	public boolean levelCompleted() {
-		int a = 0;
-		for (AbstractObjects object: getObjects())
-			if (object.getName()=="Box" && ((Box)object).isTargetActivated()==true) {
-//				System.out.println(a);
-				a++;
+		int targetActivated = 0;
+		for (AbstractObjects object: objects)
+			if (object.getName()=="Box" && ((Box)object).isTargetActivated()) {
+				targetActivated++;
 			}
-		if (a==nTarget)	return true;
+		if (targetActivated==nTarget)	return true;
 		else return false;
 	}
-	
+
 	//When the user completes a level
 	public void nextLevel() {	
-		if (levelCompleted()==true) {			
+		if (levelCompleted()) {			
 			System.out.println("You just completed the level.");
 			try {
 				FileWriter file = new FileWriter("points/punctuation.txt");
@@ -215,44 +219,81 @@ public class SokobanGame implements Observer {
 
 				JOptionPane.showMessageDialog(null, " Name: "+ playerName + "    Steps: "  + steps);
 
-				ImageMatrixGUI.getInstance().clearImages();
-				objects.removeAll(objects);
 				nLevel++;
-				
+
 				//Level limitation
-				if (nLevel>NUMBER_OF_LEVELS) {
-					nLevel = NUMBER_OF_LEVELS;
-					JOptionPane.showMessageDialog(null, "You completed every single level in this game.");
-					repeatLevel();
+				if (nLevel > NUMBER_OF_LEVELS) {
+					JOptionPane.showMessageDialog(null, "You won the game. Congrats!!" );
+					ImageMatrixGUI.getInstance().dispose();
 				}
-				
+				ImageMatrixGUI.getInstance().clearImages();
+				objects.removeAll(objects);		
 				buildSampleLevel();
-				ImageMatrixGUI.getInstance().update();
 
 			}catch(IOException e) {}
 		}
 	}
-	
+
 	//When the user presses a key
 	@Override
 	public void update(Observed arg0) {
 		int lastKeyPressed = ((ImageMatrixGUI)arg0).keyPressed();
-		if (player != null) {
-			
-			if (Direction.isDirection(lastKeyPressed)) {
-				player.move(lastKeyPressed);
-				ImageMatrixGUI.getInstance().update();
+		if (player != null && Direction.isDirection(lastKeyPressed)) {	
+
+			switch(lastKeyPressed){
+			case KeyEvent.VK_LEFT:
+				player.setImageName("Player_L");
+				break;
+			case KeyEvent.VK_UP:
+				player.setImageName("Player_U");
+				break;
+			case KeyEvent.VK_RIGHT:
+				player.setImageName("Player_R");
+				break;
+			case KeyEvent.VK_DOWN:
+				player.setImageName("Player_D");
+				break;
+			}
+
+			Point2D newPlayerPosition = player.getPosition().plus(Direction.directionFor(lastKeyPressed).asVector());
+			for(AbstractObjects object: getObjects(newPlayerPosition)) {		
+
+				Point2D newPosition = object.getPosition().plus(Direction.directionFor(lastKeyPressed).asVector());
+
+				if (newPosition.getX()>=0 && newPosition.getX()<WIDTH && newPosition.getY()>=0 && newPosition.getY()<HEIGHT) {	
+					if(object.canMove(newPosition) && object.canInteract() && object instanceof ActiveObjects) { 
+						((ActiveObjects)object).move(newPosition);
+						for(AbstractObjects intObject: getObjects(newPosition))
+							if (intObject instanceof InteractiveObjects && intObject.canInteract())
+								((InteractiveObjects)intObject).interact(object);
+						ImageMatrixGUI.getInstance().update();
+					}
+				}
 			}
 			
+			for(AbstractObjects intObject: getObjects(newPlayerPosition))
+				if (intObject.canInteract()) ((InteractiveObjects)intObject).interact(player);
 			
-			if(energy<=0 || lastKeyPressed == KeyEvent.VK_R || lastKeyPressed == KeyEvent.VK_ESCAPE) {
-				repeatLevel();	
+			if (player.canMove(newPlayerPosition)) {								
+				player.move(newPlayerPosition);
+				setSteps(getSteps() + 1);
+				setEnergy(getEnergy() - 1);
+				
 				ImageMatrixGUI.getInstance().update();
+				
+				//ERRO BRITTLE WALL vs ERRO HOLE
 			}
-			nextLevel();
-			ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName +
-					"   |    Level: " + nLevel + "    |    Energy: " + energy + "    |    "
-					+ "Steps: " + steps + "    |    R to restart!");
+
 		}
+
+		if(energy<=0 || lastKeyPressed == KeyEvent.VK_R || lastKeyPressed == KeyEvent.VK_ESCAPE) {
+			repeatLevel();	
+			ImageMatrixGUI.getInstance().update();
+		}
+		nextLevel();
+		ImageMatrixGUI.getInstance().update();
+		ImageMatrixGUI.getInstance().setStatusMessage("   Player: " + playerName +
+				"   |    Level: " + nLevel + "    |    Energy: " + energy + "    |    "
+				+ "Steps: " + steps + "    |    R to restart!");
 	}
 }

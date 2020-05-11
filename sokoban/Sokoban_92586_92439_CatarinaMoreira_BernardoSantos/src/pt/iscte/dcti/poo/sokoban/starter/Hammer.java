@@ -14,8 +14,13 @@ public class Hammer extends AbstractObjects implements InteractiveObjects{
 		return "Hammer";
 	}
 	
+	@Override   					
+	public int getLayer() {
+		return 1;
+	}
+	
 	@Override
-	public void interact() {
+	public void interact(AbstractObjects object) {
 		SokobanGame game = SokobanGame.getInstance();
 		game.setHammer(true);
 		ImageMatrixGUI.getInstance().removeImage(this);

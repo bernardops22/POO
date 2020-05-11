@@ -12,4 +12,9 @@ public class Target extends AbstractObjects {
 	public String getName() {
 		return "Target";
 	}	
+	
+	@Override   					
+	public int getLayer() {
+		return 1;
+	}
 }

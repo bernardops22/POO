@@ -12,10 +12,26 @@ public class Ice extends AbstractObjects implements InteractiveObjects{
 	public String getName() {
 		return "Ice";
 	}
+	
+	@Override   					
+	public int getLayer() {
+		return 1;
+	}
+
+//	public void move(Point2D newPosition) {
+//		System.out.println("Pode mover");
+//		SokobanGame game = SokobanGame.getInstance();
+//		for (AbstractObjects object: game.getObjects(newPosition)) {
+//			if (!object.getName().equals(getName())) {
+//				System.out.println("Vai mover");
+//				object.setPosition(newPosition);
+//			}
+//		}
+//	}
 
 	@Override
-	public void interact() {
-//		SokobanGame game = SokobanGame.getInstance();
+	public void interact(AbstractObjects object) {
+		// TODO Auto-generated method stub
 		
 	}
 }

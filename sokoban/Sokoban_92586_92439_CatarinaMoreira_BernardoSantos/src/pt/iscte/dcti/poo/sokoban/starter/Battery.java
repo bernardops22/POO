@@ -13,10 +13,14 @@ public class Battery extends AbstractObjects implements InteractiveObjects{
 	public String getName() {
 		return "Battery";
 	}
-
+	
+	@Override   					
+	public int getLayer() {
+		return 1;
+	}
 
 	@Override
-	public void interact() {
+	public void interact(AbstractObjects object) {
 		SokobanGame game = SokobanGame.getInstance();
 		game.setEnergy(100);
 		ImageMatrixGUI.getInstance().removeImage(this);
