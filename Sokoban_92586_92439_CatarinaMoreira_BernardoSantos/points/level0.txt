@@ -1,0 +1,6 @@
+Bernardo:30
+Maria:32
+Berta:28
+Ola:28
+Orlando:28
+Amelia:28

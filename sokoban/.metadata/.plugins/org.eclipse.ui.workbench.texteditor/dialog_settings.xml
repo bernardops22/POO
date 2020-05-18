@@ -8,14 +8,14 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="read"/>
+			<item value="blue"/>
 			<item value="setSteps"/>
 			<item value="get"/>
 			<item value="getPosition"/>
 			<item value="ImageTile"/>
 			<item value="!="/>
 			<item value="=="/>
-			<item value="update"/>
-			<item value="System.out"/>
 		</list>
 		<list key="replacehistory">
 		</list>
