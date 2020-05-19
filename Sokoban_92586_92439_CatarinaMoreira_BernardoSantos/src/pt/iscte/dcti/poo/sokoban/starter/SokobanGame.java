@@ -201,8 +201,7 @@ public class SokobanGame implements Observer {
 	//When the user completes a level
 	public void nextLevel() {	
 		if (levelCompleted()) {			
-			Scores.writeToFile();
-			Scores.readFromFile();
+			Scores.highScores();
 			nLevel++;
 
 			//Level limitation
@@ -250,7 +249,7 @@ public class SokobanGame implements Observer {
 
 						for(AbstractObjects intObject: getObjectsFromPosition(newPosition))
 							if (intObject instanceof InteractiveObjects && intObject.canInteract())
-								((InteractiveObjects)intObject).interact(object);
+								((InteractiveObjects)intObject).interact(object,lastKeyPressed);
 
 						ImageMatrixGUI.getInstance().update();
 					}
@@ -264,7 +263,8 @@ public class SokobanGame implements Observer {
 			}
 
 			for(AbstractObjects intObject: getObjectsFromPosition(newPlayerPosition))
-				if (intObject.canInteract() && intObject instanceof InteractiveObjects) ((InteractiveObjects)intObject).interact(player);
+				if (intObject.canInteract() && intObject instanceof InteractiveObjects) 
+					((InteractiveObjects)intObject).interact(player,lastKeyPressed);
 
 			ImageMatrixGUI.getInstance().update();
 		}

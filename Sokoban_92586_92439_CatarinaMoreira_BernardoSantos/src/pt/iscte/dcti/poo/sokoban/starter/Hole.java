@@ -21,7 +21,7 @@ public class Hole extends AbstractObjects implements InteractiveObjects{
 	}
 
 	@Override
-	public void interact(AbstractObjects object) {
+	public void interact(AbstractObjects object, int lastKeyPressed) {
 		SokobanGame game = SokobanGame.getInstance();
 		System.out.println(object.getName() + " entrou no buraco");
 		if(object.getName().contains("BigStone")) {

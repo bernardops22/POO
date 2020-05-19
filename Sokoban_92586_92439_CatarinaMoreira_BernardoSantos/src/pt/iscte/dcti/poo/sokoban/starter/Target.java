@@ -29,7 +29,7 @@ public class Target extends AbstractObjects implements InteractiveObjects {
 	}
 
 	@Override
-	public void interact(AbstractObjects object) {
+	public void interact(AbstractObjects object, int lastKeyPressed) {
 		setTargetActivation(false);
 		if (object.getName().equals("Box"))
 			setTargetActivation(true);		

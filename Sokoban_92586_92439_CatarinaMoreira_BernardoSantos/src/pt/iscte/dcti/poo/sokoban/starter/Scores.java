@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class Scores {
 
-	private static String playerName = "";	
+	private static String playerName = "";
 
 	public static String getPlayerName() {
 		return playerName;
@@ -32,29 +32,58 @@ public class Scores {
 
 	public static void writeToFile() {
 		SokobanGame game = SokobanGame.getInstance();
-		try {
-			FileWriter file = new FileWriter("points/level" + game.getnLevel() + ".txt",true);	
-			BufferedWriter out = new BufferedWriter(file);
-			out.write(playerName + ":" + Integer.toString(game.getSteps()));
-			out.newLine();
-			out.close();
-			file.close();
+		Map<String,String> map = readFromFile();
+		if(map.containsKey(playerName) && Integer.parseInt(map.get(playerName))>game.getSteps()) {
+			map.replace(playerName, Integer.toString(game.getSteps()));
+			
+			try {			
+				FileWriter file = new FileWriter("points/level" + game.getnLevel() + ".txt");	
+				BufferedWriter out = new BufferedWriter(file);
+				for (String key : map.keySet()) {
+					out.write(key + ":" + map.get(key));
+					out.newLine();
+				}
+				out.close();
+				file.close();
+			}catch(IOException e) {}
 		}
-		catch(IOException e) {}
+		if (!map.containsKey(playerName)) {
+			try {			
+				FileWriter file = new FileWriter("points/level" + game.getnLevel() + ".txt",true);	
+				BufferedWriter out = new BufferedWriter(file);
+				out.write(playerName + ":" + game.getSteps());
+				out.newLine();
+				out.close();
+				file.close();
+			}catch(IOException e) {}
+		}
 	}
 
-	public static void readFromFile() {
+	public static Map<String, String> readFromFile() {
 		SokobanGame game = SokobanGame.getInstance();
 		Map<String, String> map = new HashMap<>();
-
 		try(Stream<String> lines = Files.lines(Paths.get("points/level" + game.getnLevel() + ".txt"))){
 			lines.filter(line -> line.contains(":")).forEach(
 					line -> map.putIfAbsent(line.split(":")[0], line.split(":")[1]));
-			
-			map.entrySet().stream().sorted((k1, k2) -> k1.getValue().compareTo(k2.getValue()))
-			.forEach(k -> System.out.println(k.getKey() + ": " + k.getValue()));
-		} 
-		catch (IOException e) {}
-//		JOptionPane.showMessageDialog(null,map);    
+			lines.close();
+		}
+		catch (IOException e) {}  
+		return map;
+	}	
+
+	public static void highScores() {
+		writeToFile();
+		Map<String, String> map = readFromFile();
+		String[] scores = new String[map.size()+1];
+		String[] key = map.keySet().toArray(new String[0]);
+		String[] value = map.values().toArray(new String[0]);
+
+		for (int i = 1; i <= map.size(); i++) {
+			scores[i] = i + "º " + key[i-1] + ": " + value[i-1];
+			if (scores[i].contains(playerName)) scores[i] = i + "º " + key[i-1] + ": " + value[i-1] + "       <--";
+		}
+		scores[0] = "KINGS OF SOKOBAN";
+
+		JOptionPane.showMessageDialog(null,scores);
 	}
 }

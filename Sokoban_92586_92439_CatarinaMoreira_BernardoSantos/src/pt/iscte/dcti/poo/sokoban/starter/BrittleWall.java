@@ -15,7 +15,7 @@ public class BrittleWall extends AbstractObjects implements InteractiveObjects{
 	}
 
 	@Override
-	public void interact(AbstractObjects object) {
+	public void interact(AbstractObjects object, int lastKeyPressed) {
 		SokobanGame game = SokobanGame.getInstance();
 		if (game.hasHammer()) {
 			ImageMatrixGUI.getInstance().removeImage(this);
