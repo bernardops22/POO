@@ -28,18 +28,18 @@ public class Teleport extends AbstractObjects implements InteractiveObjects{
 	public boolean isBlocked() {
 		SokobanGame game = SokobanGame.getInstance();
 		for(AbstractObjects object: game.getObjectsFromPosition(tpPosition()))
-			if(object instanceof ActiveObjects) {
-				return true;
-			}
+			if(object instanceof ActiveObjects && !(object instanceof Player)) return true;
 		return false;
 	}
 	
-	public void setStuck() {
+	public void lockUnlock(boolean value) {
 		SokobanGame game = SokobanGame.getInstance();
-		setInteract(false);
 		for(AbstractObjects object: game.getObjectsFromPosition(tpPosition()))
-			if (object instanceof InteractiveObjects)
-				object.setInteract(false);
+			if (object instanceof InteractiveObjects) {
+				object.setInteract(value);
+				setInteract(value);
+				System.out.println(value);
+			}
 	}
 
 	public Point2D tpPosition() {
@@ -52,16 +52,10 @@ public class Teleport extends AbstractObjects implements InteractiveObjects{
 	
 	@Override
 	public void interact(AbstractObjects object, int lastKeyPressed) {
-		if(object instanceof ActiveObjects) {
 			if(!isBlocked()) {
-				setInteract(true);
+				lockUnlock(true);
 				object.setPosition(tpPosition());
-
-				System.out.println(object.getName() + " posição: " + object.getPosition());
-				System.out.println("Nova posição: " + object.getPosition());
-				System.out.println(" ");
 			}
-			else setStuck();
-		}
+			else lockUnlock(false);
 	}
 }

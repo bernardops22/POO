@@ -248,7 +248,7 @@ public class SokobanGame implements Observer {
 						((ActiveObjects)object).move(newPosition);
 
 						for(AbstractObjects intObject: getObjectsFromPosition(newPosition))
-							if (intObject instanceof InteractiveObjects && intObject.canInteract())
+							if (intObject instanceof InteractiveObjects)
 								((InteractiveObjects)intObject).interact(object,lastKeyPressed);
 
 						ImageMatrixGUI.getInstance().update();
@@ -263,13 +263,13 @@ public class SokobanGame implements Observer {
 			}
 
 			for(AbstractObjects intObject: getObjectsFromPosition(newPlayerPosition))
-				if (intObject.canInteract() && intObject instanceof InteractiveObjects) 
+				if (intObject instanceof InteractiveObjects) 
 					((InteractiveObjects)intObject).interact(player,lastKeyPressed);
 
 			ImageMatrixGUI.getInstance().update();
 		}
 		
-		if(energy<=0 || lastKeyPressed == KeyEvent.VK_R || lastKeyPressed == KeyEvent.VK_ESCAPE) repeatLevel();	
+		if(energy<=0 || lastKeyPressed == KeyEvent.VK_R || lastKeyPressed == KeyEvent.VK_ESCAPE) repeatLevel();
 		
 		nextLevel();
 		

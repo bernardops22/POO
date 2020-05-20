@@ -14,6 +14,7 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\bphsa\Downloads\Sokoban2020_CatarinaMoreira_92586_BernardoSantos_92439_V2.zip"/>
 			<item value="C:\Users\bphsa\Downloads\Sokoban2020_CatarinaMoreira_92586_BernardoSantos_92439.zip"/>
 			<item value="C:\Users\bphsa\Downloads\A2_AED.zip"/>
 		</list>

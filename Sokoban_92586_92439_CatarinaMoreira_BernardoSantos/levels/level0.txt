@@ -1,10 +1,10 @@
 OOOOOOOOOO
 ##########
-#X%gggggt#
-###     g#
-#m   C  g#
-#    g  g#
-#OS     g#
-#    s  g#
+#X%   t b#
+### s   g#
+#m  g b g#
+#   gC  g#
+#OS O   g#
+#   C   g#
 #tggggggE#
 OOOOOOOOOO

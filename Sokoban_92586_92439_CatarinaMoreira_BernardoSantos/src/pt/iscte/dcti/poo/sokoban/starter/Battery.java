@@ -20,13 +20,14 @@ public class Battery extends AbstractObjects implements InteractiveObjects{
 	}
 
 	@Override
-	public void interact(AbstractObjects object, int lastKeyPressed) {
-		SokobanGame game = SokobanGame.getInstance();
-//		if (!object.getName().contains("Player"))
-//			return;
-		game.setEnergy(100);
-		ImageMatrixGUI.getInstance().removeImage(this);
-		setInteract(false);
-
-	}
+	 public void interact(AbstractObjects object, int lastKeyPressed) {
+	        SokobanGame game = SokobanGame.getInstance();
+	        for(AbstractObjects obj: game.getObjectsFromPosition(getPosition())) {
+	            if(obj instanceof Player) {
+	                game.setEnergy(100);
+	                setInteract(false);
+	                ImageMatrixGUI.getInstance().removeImage(this);
+	            }
+	        }
+	    }
 }

@@ -5,7 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
@@ -32,7 +37,7 @@ public class Scores {
 
 	public static void writeToFile() {
 		SokobanGame game = SokobanGame.getInstance();
-		Map<String,String> map = readFromFile();
+		Map<String, String> map = readFromFile();
 		if(map.containsKey(playerName) && Integer.parseInt(map.get(playerName))>game.getSteps()) {
 			map.replace(playerName, Integer.toString(game.getSteps()));
 			
@@ -59,16 +64,40 @@ public class Scores {
 		}
 	}
 
-	public static Map<String, String> readFromFile() {
+	public static LinkedHashMap<String, String> readFromFile() {
 		SokobanGame game = SokobanGame.getInstance();
 		Map<String, String> map = new HashMap<>();
+		LinkedHashMap<String, String> sortedMap = new LinkedHashMap<>();
+		
 		try(Stream<String> lines = Files.lines(Paths.get("points/level" + game.getnLevel() + ".txt"))){
 			lines.filter(line -> line.contains(":")).forEach(
 					line -> map.putIfAbsent(line.split(":")[0], line.split(":")[1]));
 			lines.close();
+			
+			List<String> mapKeys = new ArrayList<>(map.keySet());
+		    List<String> mapValues = new ArrayList<>(map.values());
+		    Collections.sort(mapValues);
+		    
+		    Iterator<String> valueIt = mapValues.iterator();
+		    while (valueIt.hasNext()) {
+		        String value = valueIt.next();
+		        Iterator<String> keyIt = mapKeys.iterator();
+
+		        while (keyIt.hasNext()) {
+		            String key = keyIt.next();
+		            String comp1 = map.get(key);
+		            String comp2 = value;
+
+		            if (comp1.equals(comp2)) {
+		                keyIt.remove();
+		                sortedMap.put(key, value);
+		                break;
+		            }
+		        }
+		    }
 		}
 		catch (IOException e) {}  
-		return map;
+		return sortedMap;
 	}	
 
 	public static void highScores() {

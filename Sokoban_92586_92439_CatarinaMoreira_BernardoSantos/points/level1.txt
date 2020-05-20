@@ -1,2 +1,3 @@
-Alfredo:47
-Bernardo:49
+Bernardo:47
+Teste:47
+Sandro:45

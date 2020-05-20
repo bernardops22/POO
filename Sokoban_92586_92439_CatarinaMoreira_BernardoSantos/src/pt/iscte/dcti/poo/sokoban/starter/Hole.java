@@ -22,23 +22,26 @@ public class Hole extends AbstractObjects implements InteractiveObjects{
 
 	@Override
 	public void interact(AbstractObjects object, int lastKeyPressed) {
-		SokobanGame game = SokobanGame.getInstance();
-		System.out.println(object.getName() + " entrou no buraco");
-		if(object.getName().contains("BigStone")) {
-			object.setInteract(false);
-			setInteract(false);
-			return;
-		}
-		if(object.getName().contains("Player")) {
-			game.setEnergy(0);
-			JOptionPane.showMessageDialog(null, "You have fallen into a hole. Press R to restart.");
-			return;
-		}
-		else {
-			object.setTransposable(true);
-			object.setInteract(false);
-			ImageMatrixGUI.getInstance().removeImage(object);
-			ImageMatrixGUI.getInstance().update();
+		if (canInteract()) {
+			SokobanGame game = SokobanGame.getInstance();
+			if(object instanceof BigStone) {
+				object.setInteract(false);
+				setInteract(false);
+				return;
+			}
+			if(object instanceof Player) {
+				game.setEnergy(0);
+				ImageMatrixGUI.getInstance().update();
+				ImageMatrixGUI.getInstance().removeImage(object);
+				JOptionPane.showMessageDialog(null, "You have fallen into a hole. Press R to restart.");
+				return;
+			}
+			else {
+				object.setTransposable(true);
+				object.setInteract(false);
+				ImageMatrixGUI.getInstance().removeImage(object);
+				ImageMatrixGUI.getInstance().update();
+			}
 		}
 	}
 }

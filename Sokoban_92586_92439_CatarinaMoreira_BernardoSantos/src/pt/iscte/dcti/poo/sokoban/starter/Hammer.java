@@ -26,6 +26,4 @@ public class Hammer extends AbstractObjects implements InteractiveObjects{
 		ImageMatrixGUI.getInstance().removeImage(this);
 		setInteract(false);
 	}
-
-
 }
